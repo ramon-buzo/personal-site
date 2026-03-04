@@ -1,0 +1,579 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>ramonbuzo.tech</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;1,400&family=DM+Mono:wght@300;400&family=Lora:wght@400;500&display=swap" rel="stylesheet">
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --cream:   #f5f0e8;
+      --cream2:  #ede7d9;
+      --ink:     #1a1612;
+      --ink2:    #3d3530;
+      --muted:   #8c7b6e;
+      --accent:  #b85c38;
+      --accent2: #d4784e;
+      --border:  rgba(26,22,18,0.10);
+      --online:  #5a9e6f;
+      --offline: #c0392b;
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      font-family: 'Lora', Georgia, serif;
+      background: var(--cream);
+      color: var(--ink);
+      min-height: 100vh;
+      overflow-x: hidden;
+    }
+
+    /* ── Texture overlay ── */
+    body::before {
+      content: '';
+      position: fixed; inset: 0;
+      background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.035'/%3E%3C/svg%3E");
+      pointer-events: none; z-index: 0;
+    }
+
+    /* ── Header ── */
+    header {
+      position: relative; z-index: 10;
+      display: flex; align-items: center; justify-content: space-between;
+      padding: 2rem 3rem;
+      border-bottom: 1px solid var(--border);
+    }
+
+    .logo {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.25rem;
+      color: var(--ink);
+      text-decoration: none;
+      letter-spacing: -0.01em;
+    }
+    .logo span { color: var(--accent); font-style: italic; }
+
+    .header-meta {
+      font-family: 'DM Mono', monospace;
+      font-size: 0.7rem;
+      color: var(--muted);
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+    }
+
+    /* ── Hero ── */
+    .hero {
+      position: relative; z-index: 1;
+      padding: 4rem 3rem 3rem;
+      display: flex; align-items: flex-end; justify-content: space-between;
+      gap: 2rem;
+      border-bottom: 1px solid var(--border);
+    }
+
+    .hero-text {}
+
+    .hero-eyebrow {
+      font-family: 'DM Mono', monospace;
+      font-size: 0.68rem;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--accent);
+      margin-bottom: 1rem;
+      display: flex; align-items: center; gap: 0.75rem;
+    }
+    .hero-eyebrow::before {
+      content: '';
+      display: block;
+      width: 2rem; height: 1px;
+      background: var(--accent);
+    }
+
+    .hero-title {
+      font-family: 'Playfair Display', serif;
+      font-size: clamp(2.5rem, 5vw, 4rem);
+      font-weight: 400;
+      line-height: 1.1;
+      letter-spacing: -0.02em;
+      color: var(--ink);
+    }
+    .hero-title em {
+      font-style: italic;
+      color: var(--accent);
+    }
+
+    .hero-sub {
+      margin-top: 1.25rem;
+      font-size: 0.95rem;
+      color: var(--muted);
+      max-width: 40ch;
+      line-height: 1.7;
+    }
+
+    .hero-cta {
+      display: inline-flex; align-items: center; gap: 0.5rem;
+      margin-top: 2rem;
+      font-family: 'DM Mono', monospace;
+      font-size: 0.72rem;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--ink);
+      text-decoration: none;
+      border-bottom: 1px solid var(--accent);
+      padding-bottom: 0.15rem;
+      transition: color 0.2s, border-color 0.2s;
+    }
+    .hero-cta:hover { color: var(--accent); }
+    .hero-cta::after { content: '→'; }
+
+    .hero-stats {
+      display: flex; gap: 2.5rem;
+      flex-shrink: 0;
+    }
+    .stat { text-align: right; }
+    .stat-num {
+      font-family: 'Playfair Display', serif;
+      font-size: 2rem;
+      font-weight: 600;
+      color: var(--ink);
+      line-height: 1;
+    }
+    .stat-num sup {
+      font-size: 0.9rem;
+      color: var(--accent);
+      vertical-align: super;
+    }
+    .stat-label {
+      font-family: 'DM Mono', monospace;
+      font-size: 0.62rem;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      color: var(--muted);
+      margin-top: 0.3rem;
+    }
+
+    /* ── Main grid ── */
+    main {
+      position: relative; z-index: 1;
+      padding: 3rem;
+      display: grid;
+      grid-template-columns: 1fr 1fr 1fr;
+      grid-template-rows: auto auto;
+      gap: 1px;
+      background: var(--border);
+      border-bottom: 1px solid var(--border);
+    }
+
+    /* ── Cards ── */
+    .card {
+      background: var(--cream);
+      padding: 2rem;
+      display: flex; flex-direction: column;
+      gap: 1.25rem;
+      transition: background 0.2s;
+      text-decoration: none;
+      color: inherit;
+      position: relative;
+      overflow: hidden;
+    }
+    .card:hover { background: var(--cream2); }
+
+    .card::after {
+      content: '↗';
+      position: absolute;
+      top: 1.5rem; right: 1.75rem;
+      font-size: 1rem;
+      color: var(--accent);
+      opacity: 0;
+      transform: translate(-4px, 4px);
+      transition: opacity 0.2s, transform 0.2s;
+    }
+    .card:hover::after { opacity: 1; transform: translate(0,0); }
+
+    .card-featured {
+      grid-column: span 2;
+    }
+
+    .card-num {
+      font-family: 'DM Mono', monospace;
+      font-size: 0.62rem;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      color: var(--muted);
+    }
+
+    .card-icon {
+      width: 2.5rem; height: 2.5rem;
+      border-radius: 0.5rem;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 1.25rem;
+      background: var(--cream2);
+      flex-shrink: 0;
+    }
+
+    .card-header {
+      display: flex; align-items: center; gap: 1rem;
+    }
+
+    .card-title {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.2rem;
+      font-weight: 400;
+      color: var(--ink);
+      line-height: 1.2;
+    }
+
+    .card-desc {
+      font-size: 0.85rem;
+      color: var(--muted);
+      line-height: 1.65;
+      flex: 1;
+    }
+
+    .card-footer {
+      display: flex; align-items: center; justify-content: space-between;
+      padding-top: 1rem;
+      border-top: 1px solid var(--border);
+      margin-top: auto;
+    }
+
+    .card-url {
+      font-family: 'DM Mono', monospace;
+      font-size: 0.65rem;
+      color: var(--muted);
+      letter-spacing: 0.05em;
+    }
+
+    /* ── Status badge ── */
+    .status {
+      display: flex; align-items: center; gap: 0.4rem;
+      font-family: 'DM Mono', monospace;
+      font-size: 0.62rem;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+    }
+    .status-dot {
+      width: 6px; height: 6px;
+      border-radius: 50%;
+      background: var(--muted);
+      flex-shrink: 0;
+      position: relative;
+    }
+    .status-dot.online { background: var(--online); }
+    .status-dot.online::after {
+      content: '';
+      position: absolute; inset: -3px;
+      border-radius: 50%;
+      background: var(--online);
+      opacity: 0.3;
+      animation: pulse 2s infinite;
+    }
+    .status-dot.offline { background: var(--offline); }
+    .status-dot.checking { background: var(--muted); animation: blink 1s infinite; }
+
+    @keyframes pulse {
+      0%, 100% { transform: scale(1); opacity: 0.3; }
+      50% { transform: scale(1.8); opacity: 0; }
+    }
+    @keyframes blink {
+      0%, 100% { opacity: 1; }
+      50% { opacity: 0.3; }
+    }
+
+    .status-text { color: var(--muted); }
+    .status-text.online { color: var(--online); }
+    .status-text.offline { color: var(--offline); }
+
+    /* ── Portfolio card special ── */
+    .card-portfolio {
+      background: var(--ink);
+      color: var(--cream);
+    }
+    .card-portfolio:hover { background: var(--ink2); }
+    .card-portfolio .card-title { color: var(--cream); }
+    .card-portfolio .card-desc { color: rgba(245,240,232,0.55); }
+    .card-portfolio .card-url { color: rgba(245,240,232,0.35); }
+    .card-portfolio .card-footer { border-top-color: rgba(245,240,232,0.1); }
+    .card-portfolio .card-icon { background: rgba(245,240,232,0.08); }
+    .card-portfolio::after { color: var(--accent2); }
+    .card-portfolio .card-num { color: rgba(245,240,232,0.3); }
+    .card-portfolio .status-text { color: rgba(245,240,232,0.4); }
+    .card-portfolio .status-dot.online::after { background: var(--online); }
+
+    /* ── Footer ── */
+    footer {
+      position: relative; z-index: 1;
+      padding: 1.75rem 3rem;
+      display: flex; align-items: center; justify-content: space-between;
+    }
+
+    .footer-copy {
+      font-family: 'DM Mono', monospace;
+      font-size: 0.65rem;
+      color: var(--muted);
+      letter-spacing: 0.08em;
+    }
+
+    .footer-links {
+      display: flex; gap: 2rem;
+    }
+    .footer-links a {
+      font-family: 'DM Mono', monospace;
+      font-size: 0.65rem;
+      color: var(--muted);
+      text-decoration: none;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      transition: color 0.2s;
+    }
+    .footer-links a:hover { color: var(--accent); }
+
+    /* ── Divider line ── */
+    .accent-line {
+      width: 100%;
+      height: 3px;
+      background: linear-gradient(90deg, var(--accent) 0%, var(--accent2) 50%, transparent 100%);
+    }
+
+    /* ── Responsive ── */
+    @media (max-width: 900px) {
+      main { grid-template-columns: 1fr 1fr; padding: 1.5rem; }
+      .card-featured { grid-column: span 2; }
+      header, .hero, footer { padding: 1.5rem; }
+      .hero { flex-direction: column; align-items: flex-start; }
+      .hero-stats { align-self: flex-start; }
+    }
+
+    @media (max-width: 560px) {
+      main { grid-template-columns: 1fr; padding: 1rem; gap: 1px; }
+      .card-featured { grid-column: span 1; }
+      header, .hero, footer { padding: 1.25rem; }
+      .hero-stats { display: none; }
+      .footer-links { display: none; }
+    }
+  </style>
+</head>
+<body>
+
+<div class="accent-line"></div>
+
+<header>
+  <a href="/" class="logo">Ramón <span>Buzo</span></a>
+  <div class="header-meta">Personal Infrastructure · Mexicali, MX</div>
+</header>
+
+<section class="hero">
+  <div class="hero-text">
+    <div class="hero-eyebrow">System Dashboard</div>
+    <h1 class="hero-title">Tools &amp; Services<br><em>ramonbuzo.tech</em></h1>
+    <p class="hero-sub">A curated set of open-source tools, self-hosted on a personal VPS in Boston. Nothing built here — just things I run.</p>
+    <a href="https://me.ramonbuzo.tech" class="hero-cta" target="_blank">View portfolio</a>
+  </div>
+  <div class="hero-stats">
+    <div class="stat">
+      <div class="stat-num">6<sup>+</sup></div>
+      <div class="stat-label">Services</div>
+    </div>
+    <div class="stat">
+      <div class="stat-num">1</div>
+      <div class="stat-label">VPS</div>
+    </div>
+    <div class="stat">
+      <div class="stat-num">24<sup>/7</sup></div>
+      <div class="stat-label">Uptime</div>
+    </div>
+  </div>
+</section>
+
+<main>
+
+  <!-- Portfolio — featured dark card -->
+  <a href="https://me.ramonbuzo.tech" class="card card-featured card-portfolio" target="_blank">
+    <div class="card-num">00 / Portfolio</div>
+    <div class="card-header">
+      <div class="card-icon">✦</div>
+      <h2 class="card-title">Personal Portfolio</h2>
+    </div>
+    <p class="card-desc">Backend Developer & Technical Lead. 12+ years architecting systems that scale — billing infrastructure, LATAM APIs, team leadership.</p>
+    <div class="card-footer">
+      <span class="card-url">me.ramonbuzo.tech</span>
+      <div class="status">
+        <div class="status-dot online" id="dot-portfolio"></div>
+        <span class="status-text online" id="txt-portfolio">Online</span>
+      </div>
+    </div>
+  </a>
+
+  <!-- Webmail -->
+  <a href="https://webmail.ramonbuzo.tech" class="card" target="_blank">
+    <div class="card-num">01 / Mail</div>
+    <div class="card-header">
+      <div class="card-icon">✉</div>
+      <h2 class="card-title">Webmail</h2>
+    </div>
+    <p class="card-desc">Roundcube — open-source webmail client. Self-hosted with docker-mailserver for full IMAP/SMTP control.</p>
+    <div class="card-footer">
+      <span class="card-url">webmail.ramonbuzo.tech</span>
+      <div class="status">
+        <div class="status-dot checking" id="dot-webmail"></div>
+        <span class="status-text" id="txt-webmail">Checking...</span>
+      </div>
+    </div>
+  </a>
+
+  <!-- Hoppscotch -->
+  <a href="https://hoppscotch.ramonbuzo.tech" class="card" target="_blank">
+    <div class="card-num">02 / API</div>
+    <div class="card-header">
+      <div class="card-icon">⚡</div>
+      <h2 class="card-title">Hoppscotch</h2>
+    </div>
+    <p class="card-desc">Hoppscotch — open-source API testing platform. Self-hosted instance for REST, GraphQL, and WebSocket testing.</p>
+    <div class="card-footer">
+      <span class="card-url">hoppscotch.ramonbuzo.tech</span>
+      <div class="status">
+        <div class="status-dot checking" id="dot-hoppscotch"></div>
+        <span class="status-text" id="txt-hoppscotch">Checking...</span>
+      </div>
+    </div>
+  </a>
+
+  <!-- IT Tools -->
+  <a href="https://tools.ramonbuzo.tech" class="card" target="_blank">
+    <div class="card-num">03 / Tools</div>
+    <div class="card-header">
+      <div class="card-icon">⚙</div>
+      <h2 class="card-title">IT Tools</h2>
+    </div>
+    <p class="card-desc">IT-Tools by Corentin Thomasset — open-source collection of handy developer utilities. Self-hosted for offline access.</p>
+    <div class="card-footer">
+      <span class="card-url">tools.ramonbuzo.tech</span>
+      <div class="status">
+        <div class="status-dot checking" id="dot-tools"></div>
+        <span class="status-text" id="txt-tools">Checking...</span>
+      </div>
+    </div>
+  </a>
+
+  <!-- Snippet Box -->
+  <a href="https://snippets.ramonbuzo.tech" class="card" target="_blank">
+    <div class="card-num">04 / Snippets</div>
+    <div class="card-header">
+      <div class="card-icon">{ }</div>
+      <h2 class="card-title">Snippet Box</h2>
+    </div>
+    <p class="card-desc">Snippet Box by Pawel Malak — open-source snippet manager. Self-hosted to keep code fragments organized and private.</p>
+    <div class="card-footer">
+      <span class="card-url">snippets.ramonbuzo.tech</span>
+      <div class="status">
+        <div class="status-dot checking" id="dot-snippets"></div>
+        <span class="status-text" id="txt-snippets">Checking...</span>
+      </div>
+    </div>
+  </a>
+
+  <!-- NPM -->
+  <a href="https://npm.ramonbuzo.tech" class="card" target="_blank">
+    <div class="card-num">05 / Infra</div>
+    <div class="card-header">
+      <div class="card-icon">⬡</div>
+      <h2 class="card-title">Nginx Proxy Manager</h2>
+    </div>
+    <p class="card-desc">Nginx Proxy Manager — open-source reverse proxy UI. Manages SSL certificates and routing for all services on this VPS.</p>
+    <div class="card-footer">
+      <span class="card-url">npm.ramonbuzo.tech</span>
+      <div class="status">
+        <div class="status-dot checking" id="dot-npm"></div>
+        <span class="status-text" id="txt-npm">Checking...</span>
+      </div>
+    </div>
+  </a>
+
+</main>
+
+<footer>
+  <div class="footer-copy">© 2026 Ramón Buzo · ramonbuzo.tech</div>
+  <nav class="footer-links">
+    <a href="https://me.ramonbuzo.tech">Portfolio</a>
+    <a href="https://github.com/ramon-buzo" target="_blank">GitHub</a>
+    <a href="https://www.linkedin.com/in/ramon-buzo-b9033b79/" target="_blank">LinkedIn</a>
+    <a href="/cdn-cgi/l/email-protection#74171b1a00151700340615191b1a16010e1b5a0011171c">Contact</a>
+  </nav>
+</footer>
+
+<script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
+  // Status checker
+  const services = [
+    { id: 'webmail',    url: 'https://webmail.ramonbuzo.tech',    protected: false },
+    { id: 'hoppscotch', url: 'https://hoppscotch.ramonbuzo.tech', protected: false },
+    { id: 'tools',      url: 'https://tools.ramonbuzo.tech',      protected: false },
+    { id: 'snippets',   url: 'https://snippets.ramonbuzo.tech',   protected: true  },
+    { id: 'npm',        url: 'https://npm.ramonbuzo.tech',        protected: false },
+    { id: 'portfolio',  url: 'https://me.ramonbuzo.tech',         protected: false },
+  ];
+
+  function setStatus(id, state) {
+    var dot = document.getElementById('dot-' + id);
+    var txt = document.getElementById('txt-' + id);
+    if (!dot || !txt) return;
+    var map = {
+      online:  { cls: 'online',  label: 'Online' },
+      offline: { cls: 'offline', label: 'Offline' },
+      private: { cls: 'online',  label: 'Private' },
+    };
+    var s = map[state] || map.offline;
+    dot.className = 'status-dot ' + s.cls;
+    txt.className = 'status-text ' + s.cls;
+    txt.textContent = s.label;
+  }
+
+  function checkService(svc) {
+    // Protected services — don't ping, just mark as private
+    if (svc.protected) { setStatus(svc.id, 'private'); return; }
+
+    var img = new Image();
+    var done = false;
+    var timer = setTimeout(function() {
+      if (!done) { done = true; setStatus(svc.id, 'offline'); }
+    }, 5000);
+    img.onload = img.onerror = function() {
+      if (!done) {
+        done = true;
+        clearTimeout(timer);
+        setStatus(svc.id, 'online');
+      }
+    };
+    img.src = svc.url + '/favicon.ico?_=' + Date.now();
+  }
+
+  // Stagger checks
+  services.forEach(function(svc, i) {
+    setTimeout(function() { checkService(svc); }, i * 300);
+  });
+
+  // Re-check every 60 seconds
+  setInterval(function() {
+    services.forEach(function(svc, i) {
+      setTimeout(function() { checkService(svc); }, i * 300);
+    });
+  }, 60000);
+
+  // Live clock in header
+  var meta = document.querySelector('.header-meta');
+  function updateClock() {
+    var now = new Date();
+    var h = now.getHours().toString().padStart(2,'0');
+    var m = now.getMinutes().toString().padStart(2,'0');
+    var s = now.getSeconds().toString().padStart(2,'0');
+    meta.textContent = 'Personal Infrastructure · ' + h + ':' + m + ':' + s;
+  }
+  updateClock();
+  setInterval(updateClock, 1000);
+</script>
+
+</body>
+</html>

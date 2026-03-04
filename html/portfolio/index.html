@@ -1,0 +1,861 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Ramón Buzo — Backend Developer</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,700;1,400;1,500&family=DM+Mono:wght@300;400&family=Lora:ital,wght@0,400;1,400&display=swap" rel="stylesheet">
+  <style>
+    *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+
+    :root {
+      --bg:       #f5f0e8;
+      --bg2:      #ede8df;
+      --surface:  #ffffff;
+      --border:   #ddd8ce;
+      --text:     #1a1612;
+      --muted:    #8a837a;
+      --accent:   #b85c38;
+      --accent2:  #7a6652;
+      --light:    #f9f6f1;
+      --mono:     'DM Mono', monospace;
+      --display:  'Playfair Display', serif;
+      --body:     'Lora', serif;
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      background: var(--bg);
+      color: var(--text);
+      font-family: var(--body);
+      font-size: 17px;
+      line-height: 1.75;
+      overflow-x: hidden;
+    }
+
+    /* ── Texture overlay ── */
+    body::after {
+      content: '';
+      position: fixed; inset: 0;
+      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='300' height='300'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.75' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='300' height='300' filter='url(%23n)' opacity='0.035'/%3E%3C/svg%3E");
+      pointer-events: none;
+      z-index: 1000;
+    }
+
+    /* ── Container ── */
+    .container { max-width: 1080px; margin: 0 auto; padding: 0 2.5rem; }
+
+    /* ── Nav ── */
+    nav {
+      position: fixed; top: 0; left: 0; right: 0; z-index: 500;
+      background: rgba(245,240,232,0.92);
+      backdrop-filter: blur(12px);
+      border-bottom: 1px solid var(--border);
+    }
+    .nav-inner {
+      max-width: 1080px; margin: 0 auto; padding: 0 2.5rem;
+      display: flex; justify-content: space-between; align-items: center;
+      height: 64px;
+    }
+    .nav-logo {
+      font-family: var(--display);
+      font-size: 1.1rem;
+      font-weight: 500;
+      color: var(--text);
+      text-decoration: none;
+      letter-spacing: 0.01em;
+    }
+    .nav-logo span { color: var(--accent); }
+    .nav-links { display: flex; gap: 2.5rem; list-style: none; }
+    .nav-links a {
+      font-family: var(--mono);
+      font-size: 0.65rem;
+      color: var(--muted);
+      text-decoration: none;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      transition: color 0.25s;
+    }
+    .nav-links a:hover { color: var(--accent); }
+
+    /* ── Hero ── */
+    #hero {
+      min-height: 100vh;
+      padding-top: 64px;
+      display: flex;
+      align-items: center;
+    }
+    .hero-inner {
+      display: grid;
+      grid-template-columns: 1fr 420px;
+      gap: 5rem;
+      align-items: center;
+      padding: 5rem 0;
+    }
+
+    .hero-text { }
+
+    .hero-kicker {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.75rem;
+      font-family: var(--mono);
+      font-size: 0.65rem;
+      color: var(--accent);
+      letter-spacing: 0.25em;
+      text-transform: uppercase;
+      margin-bottom: 1.75rem;
+    }
+    .hero-kicker::before {
+      content: '';
+      display: block;
+      width: 28px; height: 1px;
+      background: var(--accent);
+    }
+
+    .hero-name {
+      font-family: var(--display);
+      font-size: clamp(3.8rem, 6.5vw, 6rem);
+      font-weight: 400;
+      line-height: 1.0;
+      letter-spacing: -0.02em;
+      margin-bottom: 0.15em;
+    }
+    .hero-name .surname {
+      font-style: italic;
+      color: var(--accent);
+      display: block;
+    }
+
+    .hero-tagline {
+      font-family: var(--body);
+      font-size: 1.1rem;
+      color: var(--muted);
+      font-style: italic;
+      margin: 1.5rem 0 2.5rem;
+    }
+
+    .hero-desc {
+      font-size: 1rem;
+      color: var(--accent2);
+      max-width: 480px;
+      line-height: 1.85;
+      margin-bottom: 3rem;
+    }
+
+    .hero-actions {
+      display: flex;
+      gap: 1rem;
+      flex-wrap: wrap;
+    }
+
+    .btn {
+      font-family: var(--mono);
+      font-size: 0.65rem;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      text-decoration: none;
+      padding: 0.9rem 2rem;
+      transition: all 0.25s;
+      display: inline-block;
+    }
+    .btn-fill {
+      background: var(--accent);
+      color: #fff;
+      border: 1px solid var(--accent);
+    }
+    .btn-fill:hover { background: #9e4a2a; border-color: #9e4a2a; }
+    .btn-outline {
+      background: transparent;
+      color: var(--accent2);
+      border: 1px solid var(--border);
+    }
+    .btn-outline:hover { border-color: var(--accent2); color: var(--text); }
+
+    /* ── Photo column ── */
+    .hero-photo-col {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 2rem;
+    }
+
+    .photo-frame {
+      position: relative;
+      width: 280px;
+      height: 280px;
+    }
+    /* Decorative ring */
+    .photo-frame::before {
+      content: '';
+      position: absolute;
+      inset: -10px;
+      border-radius: 50%;
+      border: 1px solid var(--border);
+    }
+    /* Terracotta arc accent */
+    .photo-frame::after {
+      content: '';
+      position: absolute;
+      inset: -10px;
+      border-radius: 50%;
+      border: 2px solid transparent;
+      border-top-color: var(--accent);
+      border-right-color: var(--accent);
+      transform: rotate(-30deg);
+    }
+
+    .photo-circle {
+      width: 280px;
+      height: 280px;
+      border-radius: 50%;
+      overflow: hidden;
+      background: var(--bg2);
+      border: 3px solid var(--surface);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      position: relative;
+    }
+
+    /* Placeholder shown when no image */
+    .photo-placeholder {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 0.75rem;
+      color: var(--muted);
+    }
+    .photo-placeholder svg { opacity: 0.35; }
+    .photo-placeholder span {
+      font-family: var(--mono);
+      font-size: 0.6rem;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      opacity: 0.5;
+      text-align: center;
+      line-height: 1.6;
+    }
+
+    /* Actual photo — just swap src in the <img> below */
+    .photo-circle img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      object-position: center top;
+    }
+
+    /* Upload hint */
+    .photo-hint {
+      font-family: var(--mono);
+      font-size: 0.6rem;
+      color: var(--muted);
+      letter-spacing: 0.12em;
+      text-align: center;
+      line-height: 1.7;
+      opacity: 0.7;
+    }
+
+    /* Stats strip below photo */
+    .photo-stats {
+      display: flex;
+      gap: 2rem;
+    }
+    .pstat { text-align: center; }
+    .pstat-num {
+      font-family: var(--display);
+      font-size: 1.8rem;
+      font-weight: 500;
+      color: var(--text);
+      line-height: 1;
+    }
+    .pstat-num sup { font-size: 0.9rem; color: var(--accent); }
+    .pstat-label {
+      font-family: var(--mono);
+      font-size: 0.58rem;
+      color: var(--muted);
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      margin-top: 0.2rem;
+    }
+
+    /* ── Divider ── */
+    .rule {
+      height: 1px;
+      background: var(--border);
+      margin: 0;
+    }
+
+    /* ── Sections ── */
+    section { padding: 6rem 0; }
+
+    .section-label {
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+      font-family: var(--mono);
+      font-size: 0.62rem;
+      color: var(--accent);
+      letter-spacing: 0.25em;
+      text-transform: uppercase;
+      margin-bottom: 2.5rem;
+    }
+    .section-label::after {
+      content: '';
+      flex: 1;
+      height: 1px;
+      background: var(--border);
+    }
+
+    .section-title {
+      font-family: var(--display);
+      font-size: clamp(2rem, 4vw, 2.8rem);
+      font-weight: 400;
+      line-height: 1.15;
+      letter-spacing: -0.02em;
+      margin-bottom: 1rem;
+    }
+    .section-title em { font-style: italic; color: var(--accent); }
+
+    /* ── About ── */
+    .about-grid {
+      display: grid;
+      grid-template-columns: 1.3fr 1fr;
+      gap: 5rem;
+      align-items: start;
+    }
+    .about-body p {
+      color: var(--accent2);
+      margin-bottom: 1.5rem;
+      font-size: 1rem;
+      line-height: 1.9;
+    }
+    .about-body p strong { color: var(--text); font-weight: 400; }
+    .about-body p em { font-style: italic; }
+
+    .about-sidebar { }
+    .sidebar-card {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      padding: 1.5rem 1.75rem;
+      margin-bottom: 0.75rem;
+      position: relative;
+      overflow: hidden;
+    }
+    .sidebar-card::before {
+      content: '';
+      position: absolute;
+      left: 0; top: 0; bottom: 0;
+      width: 3px;
+      background: var(--accent);
+    }
+    .sc-label {
+      font-family: var(--mono);
+      font-size: 0.58rem;
+      color: var(--accent);
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      margin-bottom: 0.5rem;
+    }
+    .sc-value {
+      font-size: 0.95rem;
+      color: var(--text);
+      line-height: 1.55;
+    }
+
+    /* ── Experience ── */
+    #experience { background: var(--light); }
+
+    .exp-item {
+      display: grid;
+      grid-template-columns: 160px 1fr;
+      gap: 3rem;
+      padding: 2.5rem 0;
+      border-bottom: 1px solid var(--border);
+    }
+    .exp-item:first-of-type { border-top: 1px solid var(--border); }
+    .exp-period {
+      font-family: var(--mono);
+      font-size: 0.62rem;
+      color: var(--muted);
+      letter-spacing: 0.1em;
+      padding-top: 0.35rem;
+    }
+    .exp-company {
+      font-family: var(--mono);
+      font-size: 0.65rem;
+      color: var(--accent);
+      letter-spacing: 0.1em;
+      margin-top: 0.4rem;
+    }
+    .exp-role {
+      font-family: var(--display);
+      font-size: 1.35rem;
+      font-weight: 400;
+      margin-bottom: 0.75rem;
+      letter-spacing: -0.01em;
+    }
+    .exp-desc {
+      font-size: 0.95rem;
+      color: var(--accent2);
+      line-height: 1.85;
+    }
+    .exp-tags {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.4rem;
+      margin-top: 1rem;
+    }
+    .exp-tag {
+      font-family: var(--mono);
+      font-size: 0.58rem;
+      color: var(--accent2);
+      background: var(--bg2);
+      border: 1px solid var(--border);
+      padding: 0.2rem 0.65rem;
+      letter-spacing: 0.08em;
+    }
+
+    /* ── Skills ── */
+    .skills-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 1px;
+      background: var(--border);
+      border: 1px solid var(--border);
+    }
+    .skill-card {
+      background: var(--surface);
+      padding: 2.25rem 2rem;
+      transition: background 0.25s;
+    }
+    .skill-card:hover { background: var(--light); }
+    .skill-num {
+      font-family: var(--mono);
+      font-size: 0.58rem;
+      color: var(--accent);
+      letter-spacing: 0.2em;
+      margin-bottom: 0.85rem;
+    }
+    .skill-card h3 {
+      font-family: var(--display);
+      font-size: 1.2rem;
+      font-weight: 400;
+      margin-bottom: 1.25rem;
+    }
+    .skill-list {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 0.45rem;
+    }
+    .skill-list li {
+      font-family: var(--mono);
+      font-size: 0.68rem;
+      color: var(--muted);
+      letter-spacing: 0.04em;
+      display: flex;
+      align-items: center;
+      gap: 0.6rem;
+    }
+    .skill-list li::before {
+      content: '';
+      width: 4px; height: 4px;
+      border-radius: 50%;
+      background: var(--accent);
+      opacity: 0.5;
+      flex-shrink: 0;
+    }
+
+    /* ── Contact ── */
+    #contact { background: var(--bg2); }
+
+    .contact-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 6rem;
+      align-items: start;
+    }
+    .contact-headline {
+      font-family: var(--display);
+      font-size: clamp(2rem, 4vw, 3rem);
+      font-weight: 400;
+      line-height: 1.1;
+      margin-bottom: 1.5rem;
+      letter-spacing: -0.02em;
+    }
+    .contact-headline em { font-style: italic; color: var(--accent); }
+    .contact-body {
+      font-size: 0.95rem;
+      color: var(--accent2);
+      line-height: 1.85;
+      margin-bottom: 2.5rem;
+    }
+
+    .contact-links { display: flex; flex-direction: column; gap: 0.75rem; margin-top: 1.5rem; }
+    .clink {
+      display: flex;
+      align-items: center;
+      gap: 1.25rem;
+      padding: 1.1rem 1.5rem;
+      background: var(--surface);
+      border: 1px solid var(--border);
+      text-decoration: none;
+      transition: all 0.25s;
+    }
+    .clink:hover { border-color: var(--accent); background: var(--light); }
+    .clink-label {
+      font-family: var(--mono);
+      font-size: 0.58rem;
+      color: var(--muted);
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      width: 72px;
+      flex-shrink: 0;
+    }
+    .clink-val {
+      font-size: 0.9rem;
+      color: var(--text);
+      flex: 1;
+    }
+    .clink-arrow {
+      font-size: 0.75rem;
+      color: var(--muted);
+      transition: transform 0.25s, color 0.25s;
+    }
+    .clink:hover .clink-arrow { transform: translateX(4px); color: var(--accent); }
+
+    /* ── Footer ── */
+    footer {
+      background: var(--text);
+      color: var(--bg);
+      padding: 2rem 0;
+    }
+    .footer-inner {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+    .footer-name {
+      font-family: var(--display);
+      font-size: 1rem;
+      font-style: italic;
+    }
+    .footer-copy {
+      font-family: var(--mono);
+      font-size: 0.6rem;
+      opacity: 0.45;
+      letter-spacing: 0.1em;
+    }
+    .footer-loc {
+      font-family: var(--mono);
+      font-size: 0.6rem;
+      opacity: 0.45;
+      letter-spacing: 0.1em;
+    }
+
+    /* ── Reveal ── */
+    .reveal {
+      opacity: 1;
+      transform: translateY(0);
+      transition: opacity 0.65s ease, transform 0.65s ease;
+    }
+    .reveal.visible { opacity: 1; transform: translateY(0); }
+
+    /* ── Animations ── */
+    @keyframes fadeUp {
+      from { opacity: 0; transform: translateY(20px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+    @keyframes fadeIn {
+      from { opacity: 0; }
+      to   { opacity: 1; }
+    }
+
+    /* ── Responsive ── */
+    @media (max-width: 860px) {
+      .hero-inner { grid-template-columns: 1fr; }
+      .hero-photo-col { order: -1; }
+      .about-grid, .contact-grid { grid-template-columns: 1fr; gap: 3rem; }
+      .skills-grid { grid-template-columns: 1fr 1fr; }
+      .exp-item { grid-template-columns: 1fr; gap: 0.5rem; }
+      .nav-links { display: none; }
+    }
+    @media (max-width: 560px) {
+      .skills-grid { grid-template-columns: 1fr; }
+      .container { padding: 0 1.25rem; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- NAV -->
+  <nav>
+    <div class="nav-inner">
+      <a href="#" class="nav-logo">Ramón <span>Buzo</span></a>
+      <ul class="nav-links">
+        <li><a href="#about">About</a></li>
+        <li><a href="#experience">Experience</a></li>
+        <li><a href="#skills">Skills</a></li>
+        <li><a href="#contact">Contact</a></li>
+      </ul>
+    </div>
+  </nav>
+
+  <!-- HERO -->
+  <div id="hero">
+    <div class="container">
+      <div class="hero-inner">
+
+        <div class="hero-text">
+          <p class="hero-kicker">Backend Developer · Technical Lead</p>
+          <h1 class="hero-name">
+            Ramón
+            <span class="surname">Buzo.</span>
+          </h1>
+          <p class="hero-tagline">12+ years architecting systems that scale — from billing infrastructure to team leadership.</p>
+          <p class="hero-desc">
+            Backend Developer and Technical Lead specializing in RESTful &amp; SOAP APIs, billing systems, and GDPR compliance. Primary stack: PHP — but the engineering principles travel with me.
+          </p>
+          <div class="hero-actions">
+            <a href="#contact" class="btn btn-fill">Get in touch</a>
+            <a href="#experience" class="btn btn-outline">View work</a>
+          </div>
+        </div>
+
+        <!-- PHOTO COLUMN -->
+        <div class="hero-photo-col">
+          <div class="photo-frame">
+            <div class="photo-circle">
+              <div class="photo-placeholder">
+                 <img src="me.jpg" alt="Ramón Buzo">
+              </div>
+            </div>
+          </div>
+
+          <div class="photo-stats">
+            <div class="pstat">
+              <div class="pstat-num">12<sup>+</sup></div>
+              <div class="pstat-label">Yrs. exp.</div>
+            </div>
+            <div class="pstat">
+              <div class="pstat-num">10<sup>+</sup></div>
+              <div class="pstat-label">Team size</div>
+            </div>
+            <div class="pstat">
+              <div class="pstat-num">50<sup>+</sup></div>
+              <div class="pstat-label">Projects</div>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </div>
+
+  <div class="rule"></div>
+
+  <!-- ABOUT -->
+  <section id="about">
+    <div class="container">
+      <p class="section-label reveal">01 — About</p>
+      <div class="about-grid">
+        <div class="about-body reveal">
+          <h2 class="section-title" style="margin-bottom:2rem;">The person<br>behind the <em>code</em></h2>
+          <p>
+            I'm a <strong>PHP Backend Developer and Technical Lead</strong> based in Mexicali, México, with 12+ years of hands-on experience architecting, building, and scaling production web applications — including billing platforms that process millions of mobile payment transactions per month across LATAM.
+          </p>
+          <p>
+            At <strong>Gameloft</strong>, I led backend development for carrier billing and subscription platforms serving 10+ regional partners across Mexico, Central America, and South America. I designed RESTful and SOAP API integrations with mobile operators like Telcel MX and Claro, engineered a UUID-based PII anonymization system adopted company-wide, and was selected as one of two studio representatives for a global on-site in Bucharest to influence architecture decisions.
+          </p>
+          <p>
+            I've also led and mentored teams: defining technical scope, running code reviews, and training 5 cohorts of university students — several of whom I hired and later saw promoted to senior roles.
+          </p>
+          <p>
+            My surname — <em>Buzo</em> — means <strong>diver</strong> in Spanish. I like to think it captures something true: I go deep into problems, stay focused under pressure, and surface with something worth keeping.
+          </p>
+        </div>
+        <div class="about-sidebar reveal">
+          <div class="sidebar-card">
+            <div class="sc-label">Most recent role</div>
+            <div class="sc-value">Technical Lead & Senior Backend Developer<br><strong>Gameloft</strong> · Apr 2013 — Jan 2026</div>
+          </div>
+          <div class="sidebar-card">
+            <div class="sc-label">Based in</div>
+            <div class="sc-value">Mexicali, Baja California<br>México 🇲🇽</div>
+          </div>
+          <div class="sidebar-card">
+            <div class="sc-label">Specializations</div>
+            <div class="sc-value">RESTful & SOAP APIs · Billing systems<br>GDPR compliance · Team mentoring</div>
+          </div>
+          <div class="sidebar-card">
+            <div class="sc-label">Education</div>
+            <div class="sc-value">Licenciatura en Informática<br>Instituto Tecnológico de Mexicali</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <div class="rule"></div>
+
+  <!-- EXPERIENCE -->
+  <section id="experience">
+    <div class="container">
+      <p class="section-label reveal">02 — Experience</p>
+      <h2 class="section-title reveal">Where I've <em>worked</em></h2>
+
+      <div class="exp-item reveal">
+        <div>
+          <div class="exp-period">Apr 2013 — Jan 2026</div>
+          <div class="exp-company">Gameloft · 13 years</div>
+        </div>
+        <div>
+          <h3 class="exp-role">Technical Lead & Backend Developer</h3>
+          <p class="exp-desc">Leading backend development for large-scale game infrastructure. Managing a team of 10+ engineers, defining technical direction, and ensuring high-quality delivery across multiple simultaneous projects. Coordinating CI/CD pipelines with a dedicated DevOps team.</p>
+          <div class="exp-tags">
+            <span class="exp-tag">PHP</span><span class="exp-tag">MySQL</span><span class="exp-tag">REST APIs</span>
+            <span class="exp-tag">SOAP</span><span class="exp-tag">GDPR / PII</span><span class="exp-tag">Slim PHP</span><span class="exp-tag">Node.js</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="exp-item reveal">
+        <div>
+          <div class="exp-period">Ongoing</div>
+          <div class="exp-company">Independent</div>
+        </div>
+        <div>
+          <h3 class="exp-role">Builder & Automation Engineer</h3>
+          <p class="exp-desc">Passionate about automation and actively learning through personal projects — experimenting with lead generation pipelines, Telegram bots, AI-driven SEO sites, and self-hosted Docker infrastructure. Every project is a hands-on way to explore new tools and ideas.</p>
+          <div class="exp-tags">
+            <span class="exp-tag">Python</span><span class="exp-tag">Node.js</span><span class="exp-tag">n8n</span>
+            <span class="exp-tag">DeepSeek</span><span class="exp-tag">Google Ads</span><span class="exp-tag">VPS</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <div class="rule"></div>
+
+  <!-- SKILLS -->
+  <section id="skills">
+    <div class="container">
+      <p class="section-label reveal">03 — Skills</p>
+      <h2 class="section-title reveal" style="margin-bottom:3rem;">What I <em>bring</em></h2>
+      <div class="skills-grid reveal">
+        <div class="skill-card">
+          <div class="skill-num">01 / Languages & Frameworks</div>
+          <h3>Backend</h3>
+          <ul class="skill-list">
+            <li>PHP — 12+ yrs (primary)</li>
+            <li>Slim PHP · Custom MVC</li>
+            <li>JavaScript / Node.js (ES6+)</li>
+            <li>Express.js</li>
+            <li>React (working knowledge)</li>
+            <li>Laravel</li>
+            <li>Python — scripting</li>
+          </ul>
+        </div>
+        <div class="skill-card">
+          <div class="skill-num">02 / APIs & Systems</div>
+          <h3>Integration</h3>
+          <ul class="skill-list">
+            <li>RESTful API design</li>
+            <li>SOAP APIs</li>
+            <li>Billing & subscription systems</li>
+            <li>Webhooks & async flows</li>
+            <li>GDPR / PII compliance</li>
+            <li>MySQL — schema & indexing</li>
+            <li>Redis · SQLite</li>
+          </ul>
+        </div>
+        <div class="skill-card">
+          <div class="skill-num">03 / Infra & Leadership</div>
+          <h3>DevOps & Teams</h3>
+          <ul class="skill-list">
+            <li>Docker & Compose</li>
+            <li>Linux (Ubuntu)</li>
+            <li>Git · SVN</li>
+            <li>Technical leadership</li>
+            <li>Team mentoring</li>
+            <li>Cross-regional collaboration</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <div class="rule"></div>
+
+  <!-- CONTACT -->
+  <section id="contact">
+    <div class="container">
+      <p class="section-label reveal">04 — Contact</p>
+      <div class="contact-grid">
+        <div class="reveal">
+          <h2 class="contact-headline">Let's build something<br><em>worth diving into.</em></h2>
+          <p class="contact-body">Open to backend engineering roles, technical leadership positions, and polyglot environments. The stack changes — the engineering principles don't.</p>
+          <a href="mailto:contact@ramonbuzo.tech" class="btn btn-fill">Send a message</a>
+        </div>
+        <div class="contact-links reveal">
+          <a href="mailto:contact@ramonbuzo.tech" class="clink">
+            <span class="clink-label">Email</span>
+            <span class="clink-val">contact@ramonbuzo.tech</span>
+            <span class="clink-arrow">→</span>
+          </a>
+          <a href="https://github.com/ramon-buzo" class="clink" target="_blank">
+            <span class="clink-label">GitHub</span>
+            <span class="clink-val">github.com/ramon-buzo</span>
+            <span class="clink-arrow">→</span>
+          </a>
+          <a href="https://www.linkedin.com/in/ramon-buzo-b9033b79/" class="clink" target="_blank">
+            <span class="clink-label">LinkedIn</span>
+            <span class="clink-val">linkedin.com/in/ramon-buzo</span>
+            <span class="clink-arrow">→</span>
+          </a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer>
+    <div class="container">
+      <div class="footer-inner">
+        <span class="footer-name">Ramón Buzo</span>
+        <span class="footer-copy">© 2025 — All rights reserved</span>
+        <span class="footer-loc">Mexicali, BC · México</span>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    // Scroll reveal
+    const observer = new IntersectionObserver(function(entries) {
+      entries.forEach(function(entry, i) {
+        if (entry.isIntersecting) {
+          setTimeout(function() { entry.target.classList.add('visible'); }, i * 60);
+        }
+      });
+    }, { threshold: 0.08 });
+    document.querySelectorAll('.reveal').forEach(function(el) { observer.observe(el); });
+
+    // Active nav link highlight
+    const sections = document.querySelectorAll('section[id], div[id]');
+    const navLinks = document.querySelectorAll('.nav-links a');
+    window.addEventListener('scroll', function() {
+      let current = '';
+      sections.forEach(function(s) {
+        if (window.scrollY >= s.offsetTop - 100) current = s.id;
+      });
+      navLinks.forEach(function(a) {
+        a.style.color = a.getAttribute('href') === '#' + current ? 'var(--accent)' : '';
+      });
+    });
+  </script>
+</body>
+</html>
