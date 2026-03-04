@@ -36,6 +36,7 @@ jobs:
             cd ~/dockerized/personal-site
             git pull origin main
             rm -f docker-compose.override.yml
+            rm -rf .local/
 
       - name: Deploy — docker compose down + up
         if: steps.deploy_type.outputs.type == 'restart'
@@ -49,6 +50,7 @@ jobs:
             cd ~/dockerized/personal-site
             git pull origin main
             rm -f docker-compose.override.yml
+            rm -rf .local/
             docker compose down
             docker compose up -d
 
@@ -64,5 +66,6 @@ jobs:
             cd ~/dockerized/personal-site
             git pull origin main
             rm -f docker-compose.override.yml
+            rm -rf .local/
             docker compose down -v
             docker compose up -d
