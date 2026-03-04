@@ -1,4 +1,4 @@
 services:
   personal-site:
     ports:
-      - "8080:80"
+      - "9854:80"
