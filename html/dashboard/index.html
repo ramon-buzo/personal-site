@@ -33,7 +33,6 @@
       overflow-x: hidden;
     }
 
-    /* ── Texture overlay ── */
     body::before {
       content: '';
       position: fixed; inset: 0;
@@ -75,8 +74,6 @@
       border-bottom: 1px solid var(--border);
     }
 
-    .hero-text {}
-
     .hero-eyebrow {
       font-family: 'DM Mono', monospace;
       font-size: 0.68rem;
@@ -101,16 +98,13 @@
       letter-spacing: -0.02em;
       color: var(--ink);
     }
-    .hero-title em {
-      font-style: italic;
-      color: var(--accent);
-    }
+    .hero-title em { font-style: italic; color: var(--accent); }
 
     .hero-sub {
       margin-top: 1.25rem;
       font-size: 0.95rem;
       color: var(--muted);
-      max-width: 40ch;
+      max-width: 44ch;
       line-height: 1.7;
     }
 
@@ -125,7 +119,7 @@
       text-decoration: none;
       border-bottom: 1px solid var(--accent);
       padding-bottom: 0.15rem;
-      transition: color 0.2s, border-color 0.2s;
+      transition: color 0.2s;
     }
     .hero-cta:hover { color: var(--accent); }
     .hero-cta::after { content: '→'; }
@@ -142,11 +136,7 @@
       color: var(--ink);
       line-height: 1;
     }
-    .stat-num sup {
-      font-size: 0.9rem;
-      color: var(--accent);
-      vertical-align: super;
-    }
+    .stat-num sup { font-size: 0.9rem; color: var(--accent); vertical-align: super; }
     .stat-label {
       font-family: 'DM Mono', monospace;
       font-size: 0.62rem;
@@ -156,17 +146,46 @@
       margin-top: 0.3rem;
     }
 
-    /* ── Main grid ── */
-    main {
+    /* ── Section headers ── */
+    .section-header {
       position: relative; z-index: 1;
-      padding: 3rem;
+      padding: 2rem 3rem 0;
+      display: flex; align-items: center; gap: 1rem;
+    }
+
+    .section-label {
+      font-family: 'DM Mono', monospace;
+      font-size: 0.62rem;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--accent);
+    }
+
+    .section-line {
+      flex: 1;
+      height: 1px;
+      background: var(--border);
+    }
+
+    .section-count {
+      font-family: 'DM Mono', monospace;
+      font-size: 0.62rem;
+      letter-spacing: 0.1em;
+      color: var(--muted);
+    }
+
+    /* ── Grids ── */
+    .grid {
+      position: relative; z-index: 1;
+      padding: 1rem 3rem 3rem;
       display: grid;
-      grid-template-columns: 1fr 1fr 1fr;
-      grid-template-rows: auto auto;
       gap: 1px;
       background: var(--border);
       border-bottom: 1px solid var(--border);
     }
+
+    .grid-projects { grid-template-columns: 1fr 1fr; }
+    .grid-infra    { grid-template-columns: 1fr 1fr 1fr; }
 
     /* ── Cards ── */
     .card {
@@ -194,10 +213,6 @@
     }
     .card:hover::after { opacity: 1; transform: translate(0,0); }
 
-    .card-featured {
-      grid-column: span 2;
-    }
-
     .card-num {
       font-family: 'DM Mono', monospace;
       font-size: 0.62rem;
@@ -215,9 +230,7 @@
       flex-shrink: 0;
     }
 
-    .card-header {
-      display: flex; align-items: center; gap: 1rem;
-    }
+    .card-header { display: flex; align-items: center; gap: 1rem; }
 
     .card-title {
       font-family: 'Playfair Display', serif;
@@ -232,6 +245,19 @@
       color: var(--muted);
       line-height: 1.65;
       flex: 1;
+    }
+
+    .card-tags {
+      display: flex; gap: 0.5rem; flex-wrap: wrap;
+    }
+    .tag {
+      font-family: 'DM Mono', monospace;
+      font-size: 0.58rem;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--accent);
+      border: 1px solid rgba(184,92,56,0.25);
+      padding: 0.2rem 0.5rem;
     }
 
     .card-footer {
@@ -249,60 +275,33 @@
     }
 
     /* ── Status badge ── */
-    .status {
-      display: flex; align-items: center; gap: 0.4rem;
-      font-family: 'DM Mono', monospace;
-      font-size: 0.62rem;
-      letter-spacing: 0.1em;
-      text-transform: uppercase;
-    }
-    .status-dot {
-      width: 6px; height: 6px;
-      border-radius: 50%;
-      background: var(--muted);
-      flex-shrink: 0;
-      position: relative;
-    }
+    .status { display: flex; align-items: center; gap: 0.4rem; font-family: 'DM Mono', monospace; font-size: 0.62rem; letter-spacing: 0.1em; text-transform: uppercase; }
+    .status-dot { width: 6px; height: 6px; border-radius: 50%; background: var(--muted); flex-shrink: 0; position: relative; }
     .status-dot.online { background: var(--online); }
-    .status-dot.online::after {
-      content: '';
-      position: absolute; inset: -3px;
-      border-radius: 50%;
-      background: var(--online);
-      opacity: 0.3;
-      animation: pulse 2s infinite;
-    }
+    .status-dot.online::after { content: ''; position: absolute; inset: -3px; border-radius: 50%; background: var(--online); opacity: 0.3; animation: pulse 2s infinite; }
     .status-dot.offline { background: var(--offline); }
     .status-dot.checking { background: var(--muted); animation: blink 1s infinite; }
-
-    @keyframes pulse {
-      0%, 100% { transform: scale(1); opacity: 0.3; }
-      50% { transform: scale(1.8); opacity: 0; }
-    }
-    @keyframes blink {
-      0%, 100% { opacity: 1; }
-      50% { opacity: 0.3; }
-    }
-
+    @keyframes pulse { 0%, 100% { transform: scale(1); opacity: 0.3; } 50% { transform: scale(1.8); opacity: 0; } }
+    @keyframes blink { 0%, 100% { opacity: 1; } 50% { opacity: 0.3; } }
     .status-text { color: var(--muted); }
     .status-text.online { color: var(--online); }
     .status-text.offline { color: var(--offline); }
 
-    /* ── Portfolio card special ── */
-    .card-portfolio {
+    /* ── Dark card (portfolio) ── */
+    .card-dark {
       background: var(--ink);
       color: var(--cream);
     }
-    .card-portfolio:hover { background: var(--ink2); }
-    .card-portfolio .card-title { color: var(--cream); }
-    .card-portfolio .card-desc { color: rgba(245,240,232,0.55); }
-    .card-portfolio .card-url { color: rgba(245,240,232,0.35); }
-    .card-portfolio .card-footer { border-top-color: rgba(245,240,232,0.1); }
-    .card-portfolio .card-icon { background: rgba(245,240,232,0.08); }
-    .card-portfolio::after { color: var(--accent2); }
-    .card-portfolio .card-num { color: rgba(245,240,232,0.3); }
-    .card-portfolio .status-text { color: rgba(245,240,232,0.4); }
-    .card-portfolio .status-dot.online::after { background: var(--online); }
+    .card-dark:hover { background: var(--ink2); }
+    .card-dark .card-title { color: var(--cream); }
+    .card-dark .card-desc { color: rgba(245,240,232,0.55); }
+    .card-dark .card-url { color: rgba(245,240,232,0.35); }
+    .card-dark .card-footer { border-top-color: rgba(245,240,232,0.1); }
+    .card-dark .card-icon { background: rgba(245,240,232,0.08); }
+    .card-dark::after { color: var(--accent2); }
+    .card-dark .card-num { color: rgba(245,240,232,0.3); }
+    .card-dark .status-text { color: rgba(245,240,232,0.4); }
+    .card-dark .tag { color: var(--accent2); border-color: rgba(212,120,78,0.3); }
 
     /* ── Footer ── */
     footer {
@@ -310,50 +309,24 @@
       padding: 1.75rem 3rem;
       display: flex; align-items: center; justify-content: space-between;
     }
-
-    .footer-copy {
-      font-family: 'DM Mono', monospace;
-      font-size: 0.65rem;
-      color: var(--muted);
-      letter-spacing: 0.08em;
-    }
-
-    .footer-links {
-      display: flex; gap: 2rem;
-    }
-    .footer-links a {
-      font-family: 'DM Mono', monospace;
-      font-size: 0.65rem;
-      color: var(--muted);
-      text-decoration: none;
-      letter-spacing: 0.08em;
-      text-transform: uppercase;
-      transition: color 0.2s;
-    }
+    .footer-copy { font-family: 'DM Mono', monospace; font-size: 0.65rem; color: var(--muted); letter-spacing: 0.08em; }
+    .footer-links { display: flex; gap: 2rem; }
+    .footer-links a { font-family: 'DM Mono', monospace; font-size: 0.65rem; color: var(--muted); text-decoration: none; letter-spacing: 0.08em; text-transform: uppercase; transition: color 0.2s; }
     .footer-links a:hover { color: var(--accent); }
 
-    /* ── Divider line ── */
-    .accent-line {
-      width: 100%;
-      height: 3px;
-      background: linear-gradient(90deg, var(--accent) 0%, var(--accent2) 50%, transparent 100%);
-    }
+    .accent-line { width: 100%; height: 3px; background: linear-gradient(90deg, var(--accent) 0%, var(--accent2) 50%, transparent 100%); }
 
-    /* ── Responsive ── */
     @media (max-width: 900px) {
-      main { grid-template-columns: 1fr 1fr; padding: 1.5rem; }
-      .card-featured { grid-column: span 2; }
-      header, .hero, footer { padding: 1.5rem; }
+      .grid-projects, .grid-infra { grid-template-columns: 1fr 1fr; }
+      header, .hero, footer, .section-header { padding-left: 1.5rem; padding-right: 1.5rem; }
+      .grid { padding-left: 1.5rem; padding-right: 1.5rem; }
       .hero { flex-direction: column; align-items: flex-start; }
-      .hero-stats { align-self: flex-start; }
     }
-
     @media (max-width: 560px) {
-      main { grid-template-columns: 1fr; padding: 1rem; gap: 1px; }
-      .card-featured { grid-column: span 1; }
-      header, .hero, footer { padding: 1.25rem; }
-      .hero-stats { display: none; }
-      .footer-links { display: none; }
+      .grid-projects, .grid-infra { grid-template-columns: 1fr; }
+      header, .hero, footer, .section-header { padding-left: 1.25rem; padding-right: 1.25rem; }
+      .grid { padding-left: 1rem; padding-right: 1rem; }
+      .hero-stats, .footer-links { display: none; }
     }
   </style>
 </head>
@@ -369,18 +342,18 @@
 <section class="hero">
   <div class="hero-text">
     <div class="hero-eyebrow">System Dashboard</div>
-    <h1 class="hero-title">Tools &amp; Services<br><em>ramonbuzo.tech</em></h1>
-    <p class="hero-sub">A curated set of open-source tools, self-hosted on a personal VPS. Nothing built here — just things I run.</p>
+    <h1 class="hero-title">Projects &amp; Services<br><em>ramonbuzo.tech</em></h1>
+    <p class="hero-sub">Personal portfolio projects and self-hosted open-source tools running on a VPS. Some are built by me, some are just things I run.</p>
     <a href="https://me.ramonbuzo.tech" class="hero-cta" target="_blank">View portfolio</a>
   </div>
   <div class="hero-stats">
     <div class="stat">
-      <div class="stat-num">6<sup>+</sup></div>
-      <div class="stat-label">Services</div>
+      <div class="stat-num">2<sup>+</sup></div>
+      <div class="stat-label">Projects</div>
     </div>
     <div class="stat">
-      <div class="stat-num">1</div>
-      <div class="stat-label">VPS</div>
+      <div class="stat-num">5<sup>+</sup></div>
+      <div class="stat-label">Services</div>
     </div>
     <div class="stat">
       <div class="stat-num">24<sup>/7</sup></div>
@@ -389,16 +362,28 @@
   </div>
 </section>
 
-<main>
+<!-- ── Projects ── -->
+<div class="section-header">
+  <span class="section-label">Projects</span>
+  <div class="section-line"></div>
+  <span class="section-count">Built by me</span>
+</div>
 
-  <!-- Portfolio — featured dark card -->
-  <a href="https://me.ramonbuzo.tech" class="card card-featured card-portfolio" target="_blank">
-    <div class="card-num">00 / Portfolio</div>
+<div class="grid grid-projects">
+
+  <a href="https://me.ramonbuzo.tech" class="card card-dark" target="_blank">
+    <div class="card-num">01 / Portfolio</div>
     <div class="card-header">
       <div class="card-icon">✦</div>
       <h2 class="card-title">Personal Portfolio</h2>
     </div>
     <p class="card-desc">Backend Developer & Technical Lead. 12+ years architecting systems that scale — billing infrastructure, LATAM APIs, team leadership.</p>
+    <div class="card-tags">
+      <span class="tag">HTML</span>
+      <span class="tag">CSS</span>
+      <span class="tag">Nginx</span>
+      <span class="tag">Docker</span>
+    </div>
     <div class="card-footer">
       <span class="card-url">me.ramonbuzo.tech</span>
       <div class="status">
@@ -408,7 +393,39 @@
     </div>
   </a>
 
-  <!-- Webmail -->
+  <a href="https://subscription-demo.ramonbuzo.tech" class="card card-dark" target="_blank">
+    <div class="card-num">02 / Demo</div>
+    <div class="card-header">
+      <div class="card-icon">⇄</div>
+      <h2 class="card-title">Webhook Sync Bridge</h2>
+    </div>
+    <p class="card-desc">Async-to-sync subscription flow using Redis BLPOP. A partner API fires an XML webhook asynchronously — the user sees an instant, synchronous result.</p>
+    <div class="card-tags">
+      <span class="tag">PHP</span>
+      <span class="tag">Redis</span>
+      <span class="tag">Docker</span>
+      <span class="tag">Webhooks</span>
+    </div>
+    <div class="card-footer">
+      <span class="card-url">subscription-demo.ramonbuzo.tech</span>
+      <div class="status">
+        <div class="status-dot checking" id="dot-wsb"></div>
+        <span class="status-text" id="txt-wsb">Checking...</span>
+      </div>
+    </div>
+  </a>
+
+</div>
+
+<!-- ── Infrastructure ── -->
+<div class="section-header">
+  <span class="section-label">Infrastructure</span>
+  <div class="section-line"></div>
+  <span class="section-count">Self-hosted tools</span>
+</div>
+
+<div class="grid grid-infra">
+
   <a href="https://webmail.ramonbuzo.tech" class="card" target="_blank">
     <div class="card-num">01 / Mail</div>
     <div class="card-header">
@@ -425,14 +442,13 @@
     </div>
   </a>
 
-  <!-- Hoppscotch -->
   <a href="https://hoppscotch.ramonbuzo.tech" class="card" target="_blank">
     <div class="card-num">02 / API</div>
     <div class="card-header">
       <div class="card-icon">⚡</div>
       <h2 class="card-title">Hoppscotch</h2>
     </div>
-    <p class="card-desc">Hoppscotch — open-source API testing platform. Self-hosted instance for REST, GraphQL, and WebSocket testing.</p>
+    <p class="card-desc">Open-source API testing platform. Self-hosted instance for REST, GraphQL, and WebSocket testing.</p>
     <div class="card-footer">
       <span class="card-url">hoppscotch.ramonbuzo.tech</span>
       <div class="status">
@@ -442,7 +458,6 @@
     </div>
   </a>
 
-  <!-- IT Tools -->
   <a href="https://tools.ramonbuzo.tech" class="card" target="_blank">
     <div class="card-num">03 / Tools</div>
     <div class="card-header">
@@ -459,7 +474,6 @@
     </div>
   </a>
 
-  <!-- Snippet Box -->
   <a href="https://snippets.ramonbuzo.tech" class="card" target="_blank">
     <div class="card-num">04 / Snippets</div>
     <div class="card-header">
@@ -476,14 +490,13 @@
     </div>
   </a>
 
-  <!-- NPM -->
   <a href="https://npm.ramonbuzo.tech" class="card" target="_blank">
     <div class="card-num">05 / Infra</div>
     <div class="card-header">
       <div class="card-icon">⬡</div>
       <h2 class="card-title">Nginx Proxy Manager</h2>
     </div>
-    <p class="card-desc">Nginx Proxy Manager — open-source reverse proxy UI. Manages SSL certificates and routing for all services on this VPS.</p>
+    <p class="card-desc">Open-source reverse proxy UI. Manages SSL certificates and routing for all services on this VPS.</p>
     <div class="card-footer">
       <span class="card-url">npm.ramonbuzo.tech</span>
       <div class="status">
@@ -493,7 +506,7 @@
     </div>
   </a>
 
-</main>
+</div>
 
 <footer>
   <div class="footer-copy">© 2026 Ramón Buzo · ramonbuzo.tech</div>
@@ -501,19 +514,18 @@
     <a href="https://me.ramonbuzo.tech">Portfolio</a>
     <a href="https://github.com/ramon-buzo" target="_blank">GitHub</a>
     <a href="https://www.linkedin.com/in/ramon-buzo-b9033b79/" target="_blank">LinkedIn</a>
-    <a href="/cdn-cgi/l/email-protection#74171b1a00151700340615191b1a16010e1b5a0011171c">Contact</a>
   </nav>
 </footer>
 
-<script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
-  // Status checker
+<script>
   const services = [
-    { id: 'webmail',    url: 'https://webmail.ramonbuzo.tech',    protected: false },
-    { id: 'hoppscotch', url: 'https://hoppscotch.ramonbuzo.tech', protected: false },
-    { id: 'tools',      url: 'https://tools.ramonbuzo.tech',      protected: false },
-    { id: 'snippets',   url: 'https://snippets.ramonbuzo.tech',   protected: true  },
-    { id: 'npm',        url: 'https://npm.ramonbuzo.tech',        protected: false },
-    { id: 'portfolio',  url: 'https://me.ramonbuzo.tech',         protected: false },
+    { id: 'portfolio',  url: 'https://me.ramonbuzo.tech',                   protected: false },
+    { id: 'wsb',        url: 'https://subscription-demo.ramonbuzo.tech',    protected: false },
+    { id: 'webmail',    url: 'https://webmail.ramonbuzo.tech',              protected: false },
+    { id: 'hoppscotch', url: 'https://hoppscotch.ramonbuzo.tech',           protected: false },
+    { id: 'tools',      url: 'https://tools.ramonbuzo.tech',                protected: false },
+    { id: 'snippets',   url: 'https://snippets.ramonbuzo.tech',             protected: true  },
+    { id: 'npm',        url: 'https://npm.ramonbuzo.tech',                  protected: false },
   ];
 
   function setStatus(id, state) {
@@ -532,37 +544,28 @@
   }
 
   function checkService(svc) {
-    // Protected services — don't ping, just mark as private
     if (svc.protected) { setStatus(svc.id, 'private'); return; }
-
     var img = new Image();
     var done = false;
     var timer = setTimeout(function() {
       if (!done) { done = true; setStatus(svc.id, 'offline'); }
     }, 5000);
     img.onload = img.onerror = function() {
-      if (!done) {
-        done = true;
-        clearTimeout(timer);
-        setStatus(svc.id, 'online');
-      }
+      if (!done) { done = true; clearTimeout(timer); setStatus(svc.id, 'online'); }
     };
     img.src = svc.url + '/favicon.ico?_=' + Date.now();
   }
 
-  // Stagger checks
   services.forEach(function(svc, i) {
     setTimeout(function() { checkService(svc); }, i * 300);
   });
 
-  // Re-check every 60 seconds
   setInterval(function() {
     services.forEach(function(svc, i) {
       setTimeout(function() { checkService(svc); }, i * 300);
     });
   }, 60000);
 
-  // Live clock in header
   var meta = document.querySelector('.header-meta');
   function updateClock() {
     var now = new Date();
