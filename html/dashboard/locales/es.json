@@ -1,0 +1,63 @@
+{
+  "header": {
+    "meta": "Infraestructura Personal · Mexicali, MX"
+  },
+  "hero": {
+    "eyebrow": "Panel de Control",
+    "title_line1": "Proyectos & Servicios",
+    "title_line2": "ramonbuzo.tech",
+    "subtitle": "Proyectos de portafolio personales y herramientas de código abierto auto-alojadas en un VPS. Algunas las construí yo, otras simplemente las ejecuto.",
+    "cta": "Ver portafolio"
+  },
+  "stats": {
+    "projects": "Proyectos",
+    "services": "Servicios",
+    "uptime": "Disponibilidad"
+  },
+  "sections": {
+    "projects_label": "Proyectos",
+    "projects_count": "Desarrollados por mí",
+    "infra_label": "Infraestructura",
+    "infra_count": "Herramientas auto-alojadas"
+  },
+  "cards": {
+    "portfolio": {
+      "title": "Portafolio Personal",
+      "desc": "Desarrollador Backend y Líder Técnico. 12+ años arquitectando sistemas escalables — infraestructura de facturación, APIs LATAM, liderazgo de equipos."
+    },
+    "wsb": {
+      "title": "Webhook Sync Bridge",
+      "desc": "Flujo de suscripción asíncrono convertido a síncrono usando Redis BLPOP. Un partner dispara un webhook XML de forma asíncrona — el usuario ve un resultado instantáneo."
+    },
+    "webmail": {
+      "title": "Correo Web",
+      "desc": "Roundcube — cliente de correo de código abierto. Auto-alojado con docker-mailserver para control total de IMAP/SMTP."
+    },
+    "hoppscotch": {
+      "title": "Hoppscotch",
+      "desc": "Plataforma de pruebas de API de código abierto. Instancia auto-alojada para pruebas REST, GraphQL y WebSocket."
+    },
+    "tools": {
+      "title": "IT Tools",
+      "desc": "IT-Tools de Corentin Thomasset — colección de utilidades para desarrolladores. Auto-alojado para acceso sin conexión."
+    },
+    "snippets": {
+      "title": "Snippet Box",
+      "desc": "Snippet Box de Pawel Malak — gestor de fragmentos de código de código abierto. Auto-alojado para mantener los fragmentos organizados y privados."
+    },
+    "npm": {
+      "title": "Nginx Proxy Manager",
+      "desc": "Interfaz de proxy inverso de código abierto. Gestiona certificados SSL y el enrutamiento de todos los servicios en este VPS."
+    }
+  },
+  "status": {
+    "online": "En línea",
+    "offline": "Sin conexión",
+    "private": "Privado",
+    "checking": "Verificando..."
+  },
+  "footer": {
+    "copy": "© 2026 Ramón Buzo · ramonbuzo.tech",
+    "portfolio": "Portafolio"
+  }
+}

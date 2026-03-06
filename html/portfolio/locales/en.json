@@ -1,0 +1,73 @@
+{
+  "nav": {
+    "about": "About",
+    "experience": "Experience",
+    "skills": "Skills",
+    "contact": "Contact"
+  },
+  "hero": {
+    "kicker": "Backend Developer · Technical Lead",
+    "tagline": "13+ years architecting systems that scale — from billing infrastructure to team leadership.",
+    "desc": "Backend Developer and Technical Lead specializing in RESTful & SOAP APIs, billing systems, and GDPR compliance. Primary stack: PHP — but the engineering principles travel with me.",
+    "cta_primary": "Get in touch",
+    "cta_secondary": "View work"
+  },
+  "stats": {
+    "yrs": "Yrs. exp.",
+    "team": "Team size",
+    "tasks": "Tasks & integrations"
+  },
+  "about": {
+    "label": "01 — About",
+    "title_line1": "The person",
+    "title_line2": "behind the",
+    "title_em": "code",
+    "p1": "I'm a PHP Backend Developer and Technical Lead based in Mexicali, México, with 13+ years of hands-on experience architecting, building, and scaling production web applications — including billing platforms that process millions of mobile payment transactions per month across LATAM.",
+    "p2": "At Gameloft, I led backend development for carrier billing and subscription platforms serving 10+ regional partners across Mexico, Central America, and South America. I designed RESTful and SOAP API integrations with mobile operators like Telcel MX and Claro, engineered a UUID-based PII anonymization system adopted company-wide, and was selected as one of two studio representatives for a global on-site in Bucharest to influence architecture decisions.",
+    "p3": "I've also led and mentored teams: defining technical scope, running code reviews, and training 5 cohorts of university students — several of whom I hired and later saw promoted to senior roles.",
+    "p4": "My surname — Buzo — means diver in Spanish. I like to think it captures something true: I go deep into problems, stay focused under pressure, and surface with something worth keeping.",
+    "card_role_label": "Most recent role",
+    "card_role_value": "Technical Lead & Senior Backend Developer\nGameloft · Apr 2013 — Jan 2026",
+    "card_location_label": "Based in",
+    "card_location_value": "Mexicali, Baja California\nMéxico 🇲🇽",
+    "card_spec_label": "Specializations",
+    "card_spec_value": "RESTful & SOAP APIs · Billing systems\nGDPR compliance · Team mentoring",
+    "card_edu_label": "Education",
+    "card_edu_value": "Licenciatura en Informática\nInstituto Tecnológico de Mexicali"
+  },
+  "experience": {
+    "label": "02 — Experience",
+    "title": "Where I've",
+    "title_em": "worked",
+    "job1_period": "Apr 2013 — Jan 2026",
+    "job1_company": "Gameloft · 13 years",
+    "job1_role": "Technical Lead & Backend Developer",
+    "job1_desc": "Leading backend development for large-scale game infrastructure. Managing a team of 5 engineers, defining technical direction, and ensuring high-quality delivery across multiple simultaneous projects. Operating within a CI/CD pipeline environment managed by a dedicated DevOps team.",
+    "job2_period": "Ongoing",
+    "job2_company": "Independent",
+    "job2_role": "Builder & Automation Engineer",
+    "job2_desc": "Passionate about automation and actively learning through personal projects — experimenting with lead generation pipelines, Telegram bots, AI-driven SEO sites, and self-hosted Docker infrastructure. Every project is a hands-on way to explore new tools and ideas."
+  },
+  "skills": {
+    "label": "03 — Skills",
+    "title": "What I",
+    "title_em": "bring",
+    "card1_num": "01 / Languages & Frameworks",
+    "card1_title": "Backend",
+    "card2_num": "02 / APIs & Systems",
+    "card2_title": "Integration",
+    "card3_num": "03 / Infra & Leadership",
+    "card3_title": "DevOps & Teams"
+  },
+  "contact": {
+    "label": "04 — Contact",
+    "headline_line1": "Let's build something",
+    "headline_em": "worth diving into.",
+    "body": "Open to backend engineering roles, technical leadership positions, and polyglot environments. The stack changes — the engineering principles don't.",
+    "cta": "Send a message"
+  },
+  "footer": {
+    "copy": "© 2026 — All rights reserved",
+    "loc": "Mexicali, BC · México"
+  }
+}

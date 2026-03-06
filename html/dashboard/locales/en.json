@@ -1,0 +1,63 @@
+{
+  "header": {
+    "meta": "Personal Infrastructure · Mexicali, MX"
+  },
+  "hero": {
+    "eyebrow": "System Dashboard",
+    "title_line1": "Projects & Services",
+    "title_line2": "ramonbuzo.tech",
+    "subtitle": "Personal portfolio projects and self-hosted open-source tools running on a VPS. Some are built by me, some are just things I run.",
+    "cta": "View portfolio"
+  },
+  "stats": {
+    "projects": "Projects",
+    "services": "Services",
+    "uptime": "Uptime"
+  },
+  "sections": {
+    "projects_label": "Projects",
+    "projects_count": "Built by me",
+    "infra_label": "Infrastructure",
+    "infra_count": "Self-hosted tools"
+  },
+  "cards": {
+    "portfolio": {
+      "title": "Personal Portfolio",
+      "desc": "Backend Developer & Technical Lead. 12+ years architecting systems that scale — billing infrastructure, LATAM APIs, team leadership."
+    },
+    "wsb": {
+      "title": "Webhook Sync Bridge",
+      "desc": "Async-to-sync subscription flow using Redis BLPOP. A partner API fires an XML webhook asynchronously — the user sees an instant, synchronous result."
+    },
+    "webmail": {
+      "title": "Webmail",
+      "desc": "Roundcube — open-source webmail client. Self-hosted with docker-mailserver for full IMAP/SMTP control."
+    },
+    "hoppscotch": {
+      "title": "Hoppscotch",
+      "desc": "Open-source API testing platform. Self-hosted instance for REST, GraphQL, and WebSocket testing."
+    },
+    "tools": {
+      "title": "IT Tools",
+      "desc": "IT-Tools by Corentin Thomasset — open-source collection of handy developer utilities. Self-hosted for offline access."
+    },
+    "snippets": {
+      "title": "Snippet Box",
+      "desc": "Snippet Box by Pawel Malak — open-source snippet manager. Self-hosted to keep code fragments organized and private."
+    },
+    "npm": {
+      "title": "Nginx Proxy Manager",
+      "desc": "Open-source reverse proxy UI. Manages SSL certificates and routing for all services on this VPS."
+    }
+  },
+  "status": {
+    "online": "Online",
+    "offline": "Offline",
+    "private": "Private",
+    "checking": "Checking..."
+  },
+  "footer": {
+    "copy": "© 2026 Ramón Buzo · ramonbuzo.tech",
+    "portfolio": "Portfolio"
+  }
+}

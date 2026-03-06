@@ -48,6 +48,7 @@
       border-bottom: 1px solid var(--border);
     }
 
+
     .logo {
       font-family: 'Playfair Display', serif;
       font-size: 1.25rem;
@@ -57,12 +58,45 @@
     }
     .logo span { color: var(--accent); font-style: italic; }
 
+    .header-right {
+      display: flex; align-items: center; gap: 1.5rem;
+    }
+
     .header-meta {
       font-family: 'DM Mono', monospace;
       font-size: 0.7rem;
       color: var(--muted);
       letter-spacing: 0.08em;
       text-transform: uppercase;
+    }
+
+    /* ── Lang toggle ── */
+    .lang-toggle {
+      display: flex;
+      font-family: 'DM Mono', monospace;
+      font-size: 0.62rem;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      border: 1px solid var(--border);
+      overflow: hidden;
+    }
+
+    .lang-btn {
+      padding: 0.35rem 0.65rem;
+      cursor: pointer;
+      color: var(--muted);
+      background: transparent;
+      border: none;
+      font-family: 'DM Mono', monospace;
+      font-size: 0.62rem;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      transition: background 0.2s, color 0.2s;
+    }
+    .lang-btn:hover { color: var(--accent); }
+    .lang-btn.active {
+      background: var(--ink);
+      color: var(--cream);
     }
 
     /* ── Hero ── */
@@ -124,10 +158,7 @@
     .hero-cta:hover { color: var(--accent); }
     .hero-cta::after { content: '→'; }
 
-    .hero-stats {
-      display: flex; gap: 2.5rem;
-      flex-shrink: 0;
-    }
+    .hero-stats { display: flex; gap: 2.5rem; flex-shrink: 0; }
     .stat { text-align: right; }
     .stat-num {
       font-family: 'Playfair Display', serif;
@@ -161,11 +192,7 @@
       color: var(--accent);
     }
 
-    .section-line {
-      flex: 1;
-      height: 1px;
-      background: var(--border);
-    }
+    .section-line { flex: 1; height: 1px; background: var(--border); }
 
     .section-count {
       font-family: 'DM Mono', monospace;
@@ -183,7 +210,6 @@
       background: var(--border);
       border-bottom: 1px solid var(--border);
     }
-
     .grid-projects { grid-template-columns: 1fr 1fr; }
     .grid-infra    { grid-template-columns: 1fr 1fr 1fr; }
 
@@ -200,7 +226,6 @@
       overflow: hidden;
     }
     .card:hover { background: var(--cream2); }
-
     .card::after {
       content: '↗';
       position: absolute;
@@ -247,9 +272,7 @@
       flex: 1;
     }
 
-    .card-tags {
-      display: flex; gap: 0.5rem; flex-wrap: wrap;
-    }
+    .card-tags { display: flex; gap: 0.5rem; flex-wrap: wrap; }
     .tag {
       font-family: 'DM Mono', monospace;
       font-size: 0.58rem;
@@ -287,11 +310,8 @@
     .status-text.online { color: var(--online); }
     .status-text.offline { color: var(--offline); }
 
-    /* ── Dark card (portfolio) ── */
-    .card-dark {
-      background: var(--ink);
-      color: var(--cream);
-    }
+    /* ── Dark card ── */
+    .card-dark { background: var(--ink); color: var(--cream); }
     .card-dark:hover { background: var(--ink2); }
     .card-dark .card-title { color: var(--cream); }
     .card-dark .card-desc { color: rgba(245,240,232,0.55); }
@@ -327,6 +347,8 @@
       header, .hero, footer, .section-header { padding-left: 1.25rem; padding-right: 1.25rem; }
       .grid { padding-left: 1rem; padding-right: 1rem; }
       .hero-stats, .footer-links { display: none; }
+      .header-meta { display: none; }
+      header { padding-top: 1.25rem; padding-bottom: 1.25rem; }
     }
   </style>
 </head>
@@ -336,37 +358,46 @@
 
 <header>
   <a href="/" class="logo">Ramón <span>Buzo</span></a>
-  <div class="header-meta">Personal Infrastructure · Mexicali, MX</div>
+  <div class="header-right">
+    <div class="header-meta" data-i18n="header.meta">Personal Infrastructure · Mexicali, MX</div>
+    <div class="lang-toggle">
+      <button class="lang-btn active" data-lang="en">EN</button>
+      <button class="lang-btn" data-lang="es">ES</button>
+    </div>
+  </div>
 </header>
 
 <section class="hero">
   <div class="hero-text">
-    <div class="hero-eyebrow">System Dashboard</div>
-    <h1 class="hero-title">Projects &amp; Services<br><em>ramonbuzo.tech</em></h1>
-    <p class="hero-sub">Personal portfolio projects and self-hosted open-source tools running on a VPS. Some are built by me, some are just things I run.</p>
-    <a href="https://me.ramonbuzo.tech" class="hero-cta" target="_blank">View portfolio</a>
+    <div class="hero-eyebrow" data-i18n="hero.eyebrow">System Dashboard</div>
+    <h1 class="hero-title">
+      <span data-i18n="hero.title_line1">Projects &amp; Services</span><br>
+      <em>ramonbuzo.tech</em>
+    </h1>
+    <p class="hero-sub" data-i18n="hero.subtitle">Personal portfolio projects and self-hosted open-source tools running on a VPS. Some are built by me, some are just things I run.</p>
+    <a href="https://me.ramonbuzo.tech" class="hero-cta" target="_blank" data-i18n="hero.cta">View portfolio</a>
   </div>
   <div class="hero-stats">
     <div class="stat">
       <div class="stat-num">2<sup>+</sup></div>
-      <div class="stat-label">Projects</div>
+      <div class="stat-label" data-i18n="stats.projects">Projects</div>
     </div>
     <div class="stat">
       <div class="stat-num">5<sup>+</sup></div>
-      <div class="stat-label">Services</div>
+      <div class="stat-label" data-i18n="stats.services">Services</div>
     </div>
     <div class="stat">
       <div class="stat-num">24<sup>/7</sup></div>
-      <div class="stat-label">Uptime</div>
+      <div class="stat-label" data-i18n="stats.uptime">Uptime</div>
     </div>
   </div>
 </section>
 
 <!-- ── Projects ── -->
 <div class="section-header">
-  <span class="section-label">Projects</span>
+  <span class="section-label" data-i18n="sections.projects_label">Projects</span>
   <div class="section-line"></div>
-  <span class="section-count">Built by me</span>
+  <span class="section-count" data-i18n="sections.projects_count">Built by me</span>
 </div>
 
 <div class="grid grid-projects">
@@ -375,9 +406,9 @@
     <div class="card-num">01 / Portfolio</div>
     <div class="card-header">
       <div class="card-icon">✦</div>
-      <h2 class="card-title">Personal Portfolio</h2>
+      <h2 class="card-title" data-i18n="cards.portfolio.title">Personal Portfolio</h2>
     </div>
-    <p class="card-desc">Backend Developer & Technical Lead. 12+ years architecting systems that scale — billing infrastructure, LATAM APIs, team leadership.</p>
+    <p class="card-desc" data-i18n="cards.portfolio.desc">Backend Developer & Technical Lead. 12+ years architecting systems that scale — billing infrastructure, LATAM APIs, team leadership.</p>
     <div class="card-tags">
       <span class="tag">HTML</span>
       <span class="tag">CSS</span>
@@ -397,9 +428,9 @@
     <div class="card-num">02 / Demo</div>
     <div class="card-header">
       <div class="card-icon">⇄</div>
-      <h2 class="card-title">Webhook Sync Bridge</h2>
+      <h2 class="card-title" data-i18n="cards.wsb.title">Webhook Sync Bridge</h2>
     </div>
-    <p class="card-desc">Async-to-sync subscription flow using Redis BLPOP. A partner API fires an XML webhook asynchronously — the user sees an instant, synchronous result.</p>
+    <p class="card-desc" data-i18n="cards.wsb.desc">Async-to-sync subscription flow using Redis BLPOP. A partner API fires an XML webhook asynchronously — the user sees an instant, synchronous result.</p>
     <div class="card-tags">
       <span class="tag">PHP</span>
       <span class="tag">Redis</span>
@@ -419,9 +450,9 @@
 
 <!-- ── Infrastructure ── -->
 <div class="section-header">
-  <span class="section-label">Infrastructure</span>
+  <span class="section-label" data-i18n="sections.infra_label">Infrastructure</span>
   <div class="section-line"></div>
-  <span class="section-count">Self-hosted tools</span>
+  <span class="section-count" data-i18n="sections.infra_count">Self-hosted tools</span>
 </div>
 
 <div class="grid grid-infra">
@@ -430,9 +461,9 @@
     <div class="card-num">01 / Mail</div>
     <div class="card-header">
       <div class="card-icon">✉</div>
-      <h2 class="card-title">Webmail</h2>
+      <h2 class="card-title" data-i18n="cards.webmail.title">Webmail</h2>
     </div>
-    <p class="card-desc">Roundcube — open-source webmail client. Self-hosted with docker-mailserver for full IMAP/SMTP control.</p>
+    <p class="card-desc" data-i18n="cards.webmail.desc">Roundcube — open-source webmail client. Self-hosted with docker-mailserver for full IMAP/SMTP control.</p>
     <div class="card-footer">
       <span class="card-url">webmail.ramonbuzo.tech</span>
       <div class="status">
@@ -446,9 +477,9 @@
     <div class="card-num">02 / API</div>
     <div class="card-header">
       <div class="card-icon">⚡</div>
-      <h2 class="card-title">Hoppscotch</h2>
+      <h2 class="card-title" data-i18n="cards.hoppscotch.title">Hoppscotch</h2>
     </div>
-    <p class="card-desc">Open-source API testing platform. Self-hosted instance for REST, GraphQL, and WebSocket testing.</p>
+    <p class="card-desc" data-i18n="cards.hoppscotch.desc">Open-source API testing platform. Self-hosted instance for REST, GraphQL, and WebSocket testing.</p>
     <div class="card-footer">
       <span class="card-url">hoppscotch.ramonbuzo.tech</span>
       <div class="status">
@@ -462,9 +493,9 @@
     <div class="card-num">03 / Tools</div>
     <div class="card-header">
       <div class="card-icon">⚙</div>
-      <h2 class="card-title">IT Tools</h2>
+      <h2 class="card-title" data-i18n="cards.tools.title">IT Tools</h2>
     </div>
-    <p class="card-desc">IT-Tools by Corentin Thomasset — open-source collection of handy developer utilities. Self-hosted for offline access.</p>
+    <p class="card-desc" data-i18n="cards.tools.desc">IT-Tools by Corentin Thomasset — open-source collection of handy developer utilities. Self-hosted for offline access.</p>
     <div class="card-footer">
       <span class="card-url">tools.ramonbuzo.tech</span>
       <div class="status">
@@ -478,9 +509,9 @@
     <div class="card-num">04 / Snippets</div>
     <div class="card-header">
       <div class="card-icon">{ }</div>
-      <h2 class="card-title">Snippet Box</h2>
+      <h2 class="card-title" data-i18n="cards.snippets.title">Snippet Box</h2>
     </div>
-    <p class="card-desc">Snippet Box by Pawel Malak — open-source snippet manager. Self-hosted to keep code fragments organized and private.</p>
+    <p class="card-desc" data-i18n="cards.snippets.desc">Snippet Box by Pawel Malak — open-source snippet manager. Self-hosted to keep code fragments organized and private.</p>
     <div class="card-footer">
       <span class="card-url">snippets.ramonbuzo.tech</span>
       <div class="status">
@@ -494,9 +525,9 @@
     <div class="card-num">05 / Infra</div>
     <div class="card-header">
       <div class="card-icon">⬡</div>
-      <h2 class="card-title">Nginx Proxy Manager</h2>
+      <h2 class="card-title" data-i18n="cards.npm.title">Nginx Proxy Manager</h2>
     </div>
-    <p class="card-desc">Open-source reverse proxy UI. Manages SSL certificates and routing for all services on this VPS.</p>
+    <p class="card-desc" data-i18n="cards.npm.desc">Open-source reverse proxy UI. Manages SSL certificates and routing for all services on this VPS.</p>
     <div class="card-footer">
       <span class="card-url">npm.ramonbuzo.tech</span>
       <div class="status">
@@ -509,23 +540,78 @@
 </div>
 
 <footer>
-  <div class="footer-copy">© 2026 Ramón Buzo · ramonbuzo.tech</div>
+  <div class="footer-copy" data-i18n="footer.copy">© 2026 Ramón Buzo · ramonbuzo.tech</div>
   <nav class="footer-links">
-    <a href="https://me.ramonbuzo.tech">Portfolio</a>
+    <a href="https://me.ramonbuzo.tech" data-i18n="footer.portfolio">Portfolio</a>
     <a href="https://github.com/ramon-buzo" target="_blank">GitHub</a>
     <a href="https://www.linkedin.com/in/ramon-buzo-b9033b79/" target="_blank">LinkedIn</a>
   </nav>
 </footer>
 
 <script>
-  const services = [
-    { id: 'portfolio',  url: 'https://me.ramonbuzo.tech',                   protected: false },
-    { id: 'wsb',        url: 'https://subscription-demo.ramonbuzo.tech',    protected: false },
-    { id: 'webmail',    url: 'https://webmail.ramonbuzo.tech',              protected: false },
-    { id: 'hoppscotch', url: 'https://hoppscotch.ramonbuzo.tech',           protected: false },
-    { id: 'tools',      url: 'https://tools.ramonbuzo.tech',                protected: false },
-    { id: 'snippets',   url: 'https://snippets.ramonbuzo.tech',             protected: true  },
-    { id: 'npm',        url: 'https://npm.ramonbuzo.tech',                  protected: false },
+  // ── i18n ──
+  var currentLang = localStorage.getItem('lang') || 'en';
+  var translations = {};
+
+  function t(key) {
+    return key.split('.').reduce(function(o, k) {
+      return o ? o[k] : null;
+    }, translations[currentLang]) || key;
+  }
+
+  function applyTranslations() {
+    document.documentElement.lang = currentLang;
+    document.querySelectorAll('[data-i18n]').forEach(function(el) {
+      var key = el.getAttribute('data-i18n');
+      var val = t(key);
+      if (val && val !== key) el.textContent = val;
+    });
+    // Update status labels with current lang
+    document.querySelectorAll('.status-text').forEach(function(el) {
+      if (el.classList.contains('online'))  el.textContent = t('status.online');
+      if (el.classList.contains('offline')) el.textContent = t('status.offline');
+    });
+    // Update lang buttons
+    document.querySelectorAll('.lang-btn').forEach(function(btn) {
+      btn.classList.toggle('active', btn.dataset.lang === currentLang);
+    });
+  }
+
+  function loadLang(lang) {
+    if (translations[lang]) {
+      currentLang = lang;
+      localStorage.setItem('lang', lang);
+      applyTranslations();
+      return;
+    }
+    fetch('/locales/' + lang + '.json')
+      .then(function(r) { return r.json(); })
+      .then(function(data) {
+        translations[lang] = data;
+        currentLang = lang;
+        localStorage.setItem('lang', lang);
+        applyTranslations();
+      });
+  }
+
+  document.querySelectorAll('.lang-btn').forEach(function(btn) {
+    btn.addEventListener('click', function() {
+      loadLang(btn.dataset.lang);
+    });
+  });
+
+  // Load default lang on page load
+  loadLang(currentLang);
+
+  // ── Status checker ──
+  var services = [
+    { id: 'portfolio',  url: 'https://me.ramonbuzo.tech',                protected: false },
+    { id: 'wsb',        url: 'https://subscription-demo.ramonbuzo.tech', protected: false },
+    { id: 'webmail',    url: 'https://webmail.ramonbuzo.tech',           protected: false },
+    { id: 'hoppscotch', url: 'https://hoppscotch.ramonbuzo.tech',        protected: false },
+    { id: 'tools',      url: 'https://tools.ramonbuzo.tech',             protected: false },
+    { id: 'snippets',   url: 'https://snippets.ramonbuzo.tech',          protected: true  },
+    { id: 'npm',        url: 'https://npm.ramonbuzo.tech',               protected: false },
   ];
 
   function setStatus(id, state) {
@@ -533,14 +619,14 @@
     var txt = document.getElementById('txt-' + id);
     if (!dot || !txt) return;
     var map = {
-      online:  { cls: 'online',  label: 'Online' },
-      offline: { cls: 'offline', label: 'Offline' },
-      private: { cls: 'online',  label: 'Private' },
+      online:  { cls: 'online',  key: 'status.online'  },
+      offline: { cls: 'offline', key: 'status.offline' },
+      private: { cls: 'online',  key: 'status.private' },
     };
     var s = map[state] || map.offline;
     dot.className = 'status-dot ' + s.cls;
     txt.className = 'status-text ' + s.cls;
-    txt.textContent = s.label;
+    txt.textContent = t(s.key);
   }
 
   function checkService(svc) {
@@ -566,15 +652,16 @@
     });
   }, 60000);
 
+  // ── Live clock ──
   var meta = document.querySelector('.header-meta');
   function updateClock() {
     var now = new Date();
     var h = now.getHours().toString().padStart(2,'0');
     var m = now.getMinutes().toString().padStart(2,'0');
     var s = now.getSeconds().toString().padStart(2,'0');
-    meta.textContent = 'Personal Infrastructure · ' + h + ':' + m + ':' + s;
+    var base = t('header.meta').split('·')[0].trim();
+    meta.textContent = base + ' · ' + h + ':' + m + ':' + s;
   }
-  updateClock();
   setInterval(updateClock, 1000);
 </script>
 

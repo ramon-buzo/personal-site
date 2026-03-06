@@ -1,0 +1,73 @@
+{
+  "nav": {
+    "about": "Acerca de",
+    "experience": "Experiencia",
+    "skills": "Habilidades",
+    "contact": "Contacto"
+  },
+  "hero": {
+    "kicker": "Desarrollador Backend · Líder Técnico",
+    "tagline": "13+ años arquitectando sistemas escalables — desde infraestructura de facturación hasta liderazgo de equipos.",
+    "desc": "Desarrollador Backend y Líder Técnico especializado en APIs RESTful y SOAP, sistemas de facturación y cumplimiento GDPR. Stack principal: PHP — pero los principios de ingeniería viajan conmigo.",
+    "cta_primary": "Contáctame",
+    "cta_secondary": "Ver experiencia"
+  },
+  "stats": {
+    "yrs": "Años exp.",
+    "team": "Equipo",
+    "tasks": "Tareas e integraciones"
+  },
+  "about": {
+    "label": "01 — Acerca de",
+    "title_line1": "La persona",
+    "title_line2": "detrás del",
+    "title_em": "código",
+    "p1": "Soy Desarrollador Backend PHP y Líder Técnico con base en Mexicali, México, con 13+ años de experiencia práctica arquitectando, construyendo y escalando aplicaciones web en producción — incluyendo plataformas de facturación que procesan millones de transacciones de pago móvil al mes en LATAM.",
+    "p2": "En Gameloft, lideré el desarrollo backend de plataformas de facturación por carrier y suscripciones para 10+ socios regionales en México, Centroamérica y Sudamérica. Diseñé integraciones de API RESTful y SOAP con operadores móviles como Telcel MX y Claro, desarrollé un sistema de anonimización de PII basado en UUID adoptado a nivel de empresa, y fui seleccionado como uno de dos representantes del estudio para un evento global en Bucarest para influir en decisiones de arquitectura.",
+    "p3": "También he liderado y mentoreado equipos: definiendo alcance técnico, ejecutando revisiones de código y entrenando 5 generaciones de estudiantes universitarios — varios de los cuales contraté y luego vi ascender a roles senior.",
+    "p4": "Mi apellido — Buzo — significa diver en inglés. Creo que captura algo verdadero: voy a fondo en los problemas, me mantengo enfocado bajo presión, y salgo a la superficie con algo que vale la pena.",
+    "card_role_label": "Rol más reciente",
+    "card_role_value": "Líder Técnico & Desarrollador Backend Senior\nGameloft · Abr 2013 — Ene 2026",
+    "card_location_label": "Ubicación",
+    "card_location_value": "Mexicali, Baja California\nMéxico 🇲🇽",
+    "card_spec_label": "Especializaciones",
+    "card_spec_value": "APIs RESTful & SOAP · Sistemas de facturación\nCumplimiento GDPR · Mentoría de equipos",
+    "card_edu_label": "Educación",
+    "card_edu_value": "Licenciatura en Informática\nInstituto Tecnológico de Mexicali"
+  },
+  "experience": {
+    "label": "02 — Experiencia",
+    "title": "Dónde he",
+    "title_em": "trabajado",
+    "job1_period": "Abr 2013 — Ene 2026",
+    "job1_company": "Gameloft · 13 años",
+    "job1_role": "Líder Técnico & Desarrollador Backend",
+    "job1_desc": "Liderazgo del desarrollo backend para infraestructura de juegos a gran escala. Gestión de un equipo de 5 ingenieros, definición de la dirección técnica y entrega de alta calidad en múltiples proyectos simultáneos. Operando dentro de un entorno de CI/CD gestionado por un equipo DevOps dedicado.",
+    "job2_period": "En curso",
+    "job2_company": "Independiente",
+    "job2_role": "Constructor & Ingeniero de Automatización",
+    "job2_desc": "Apasionado por la automatización y aprendiendo activamente mediante proyectos personales — experimentando con pipelines de generación de leads, bots de Telegram, sitios SEO con IA e infraestructura Docker auto-alojada. Cada proyecto es una forma práctica de explorar nuevas herramientas e ideas."
+  },
+  "skills": {
+    "label": "03 — Habilidades",
+    "title": "Lo que",
+    "title_em": "ofrezco",
+    "card1_num": "01 / Lenguajes & Frameworks",
+    "card1_title": "Backend",
+    "card2_num": "02 / APIs & Sistemas",
+    "card2_title": "Integración",
+    "card3_num": "03 / Infra & Liderazgo",
+    "card3_title": "DevOps & Equipos"
+  },
+  "contact": {
+    "label": "04 — Contacto",
+    "headline_line1": "Construyamos algo",
+    "headline_em": "que valga la pena.",
+    "body": "Abierto a roles de ingeniería backend, posiciones de liderazgo técnico y entornos políglotas. El stack cambia — los principios de ingeniería no.",
+    "cta": "Enviar mensaje"
+  },
+  "footer": {
+    "copy": "© 2026 — Todos los derechos reservados",
+    "loc": "Mexicali, BC · México"
+  }
+}
