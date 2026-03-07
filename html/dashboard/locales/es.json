@@ -7,7 +7,8 @@
     "title_line1": "Proyectos & Servicios",
     "title_line2": "ramonbuzo.tech",
     "subtitle": "Proyectos de portafolio personales y herramientas de código abierto auto-alojadas en un VPS. Algunas las construí yo, otras simplemente las ejecuto.",
-    "cta": "Ver portafolio"
+    "cta": "Ver Curriculum Vitae",
+    "role": "Desarrollador Fullstack"
   },
   "stats": {
     "projects": "Proyectos",
@@ -21,13 +22,13 @@
     "infra_count": "Herramientas auto-alojadas"
   },
   "cards": {
-    "portfolio": {
-      "title": "Portafolio Personal",
-      "desc": "Desarrollador Backend y Líder Técnico. 12+ años arquitectando sistemas escalables — infraestructura de facturación, APIs LATAM, liderazgo de equipos."
-    },
     "wsb": {
       "title": "Webhook Sync Bridge",
       "desc": "Flujo de suscripción asíncrono convertido a síncrono usando Redis BLPOP. Un partner dispara un webhook XML de forma asíncrona — el usuario ve un resultado instantáneo."
+    },
+    "jqw": {
+      "title": "Job Queue Workers",
+      "desc": "Cola de trabajos distribuida con despacho justo de RabbitMQ entre 3 workers concurrentes. Dashboard en tiempo real vía SSE — observa cómo los trabajos se toman, procesan y completan en vivo."
     },
     "webmail": {
       "title": "Correo Web",

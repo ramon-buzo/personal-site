@@ -48,7 +48,6 @@
       border-bottom: 1px solid var(--border);
     }
 
-
     .logo {
       font-family: 'Playfair Display', serif;
       font-size: 1.25rem;
@@ -210,7 +209,7 @@
       background: var(--border);
       border-bottom: 1px solid var(--border);
     }
-    .grid-projects { grid-template-columns: 1fr 1fr; }
+    .grid-projects { grid-template-columns: 1fr 1fr 1fr; }
     .grid-infra    { grid-template-columns: 1fr 1fr 1fr; }
 
     /* ── Cards ── */
@@ -375,7 +374,13 @@
       <em>ramonbuzo.tech</em>
     </h1>
     <p class="hero-sub" data-i18n="hero.subtitle">Personal portfolio projects and self-hosted open-source tools running on a VPS. Some are built by me, some are just things I run.</p>
-    <a href="https://me.ramonbuzo.tech" class="hero-cta" target="_blank" data-i18n="hero.cta">View portfolio</a>
+    <div class="hero-profile">
+      <div class="hero-profile-meta">
+        <span class="hero-profile-name">Ramón Buzo</span>
+        <span class="hero-profile-role" data-i18n="hero.role">Fullstack Developer</span>
+      </div>
+      <a href="https://me.ramonbuzo.tech" class="hero-cta" target="_blank" data-i18n="hero.cta">View Resume</a>
+    </div>
   </div>
   <div class="hero-stats">
     <div class="stat">
@@ -402,30 +407,8 @@
 
 <div class="grid grid-projects">
 
-  <a href="https://me.ramonbuzo.tech" class="card card-dark" target="_blank">
-    <div class="card-num">01 / Portfolio</div>
-    <div class="card-header">
-      <div class="card-icon">✦</div>
-      <h2 class="card-title" data-i18n="cards.portfolio.title">Personal Portfolio</h2>
-    </div>
-    <p class="card-desc" data-i18n="cards.portfolio.desc">Backend Developer & Technical Lead. 12+ years architecting systems that scale — billing infrastructure, LATAM APIs, team leadership.</p>
-    <div class="card-tags">
-      <span class="tag">HTML</span>
-      <span class="tag">CSS</span>
-      <span class="tag">Nginx</span>
-      <span class="tag">Docker</span>
-    </div>
-    <div class="card-footer">
-      <span class="card-url">me.ramonbuzo.tech</span>
-      <div class="status">
-        <div class="status-dot online" id="dot-portfolio"></div>
-        <span class="status-text online" id="txt-portfolio">Online</span>
-      </div>
-    </div>
-  </a>
-
   <a href="https://subscription-demo.ramonbuzo.tech" class="card card-dark" target="_blank">
-    <div class="card-num">02 / Demo</div>
+    <div class="card-num">01 / Demo</div>
     <div class="card-header">
       <div class="card-icon">⇄</div>
       <h2 class="card-title" data-i18n="cards.wsb.title">Webhook Sync Bridge</h2>
@@ -442,6 +425,29 @@
       <div class="status">
         <div class="status-dot checking" id="dot-wsb"></div>
         <span class="status-text" id="txt-wsb">Checking...</span>
+      </div>
+    </div>
+  </a>
+
+  <a href="https://queue-demo.ramonbuzo.tech" class="card card-dark" target="_blank">
+    <div class="card-num">02 / Demo</div>
+    <div class="card-header">
+      <div class="card-icon">⬡</div>
+      <h2 class="card-title" data-i18n="cards.jqw.title">Job Queue Workers</h2>
+    </div>
+    <p class="card-desc" data-i18n="cards.jqw.desc">Distributed job queue with RabbitMQ fair dispatch across 3 concurrent workers. Real-time dashboard via SSE — watch jobs get picked up, processed, and completed live.</p>
+    <div class="card-tags">
+      <span class="tag">PHP</span>
+      <span class="tag">RabbitMQ</span>
+      <span class="tag">Redis</span>
+      <span class="tag">SSE</span>
+      <span class="tag">Docker</span>
+    </div>
+    <div class="card-footer">
+      <span class="card-url">queue-demo.ramonbuzo.tech</span>
+      <div class="status">
+        <div class="status-dot checking" id="dot-jqw"></div>
+        <span class="status-text" id="txt-jqw">Checking...</span>
       </div>
     </div>
   </a>
@@ -566,12 +572,10 @@
       var val = t(key);
       if (val && val !== key) el.textContent = val;
     });
-    // Update status labels with current lang
     document.querySelectorAll('.status-text').forEach(function(el) {
       if (el.classList.contains('online'))  el.textContent = t('status.online');
       if (el.classList.contains('offline')) el.textContent = t('status.offline');
     });
-    // Update lang buttons
     document.querySelectorAll('.lang-btn').forEach(function(btn) {
       btn.classList.toggle('active', btn.dataset.lang === currentLang);
     });
@@ -600,15 +604,14 @@
     });
   });
 
-  // Load default lang on page load
   loadLang(currentLang);
 
   // ── Status checker ──
   var services = [
-    { id: 'portfolio',  url: 'https://me.ramonbuzo.tech',                protected: false },
     { id: 'wsb',        url: 'https://subscription-demo.ramonbuzo.tech', protected: false },
+    { id: 'jqw',        url: 'https://queue-demo.ramonbuzo.tech',        protected: false },
     { id: 'webmail',    url: 'https://webmail.ramonbuzo.tech',           protected: false },
-    { id: 'hoppscotch', url: 'https://hoppscotch.ramonbuzo.tech',        protected: false },
+    { id: 'hoppscotch', url: 'https://hoppscotch.ramonbuzo.tech',        protected: true },
     { id: 'tools',      url: 'https://tools.ramonbuzo.tech',             protected: false },
     { id: 'snippets',   url: 'https://snippets.ramonbuzo.tech',          protected: true  },
     { id: 'npm',        url: 'https://npm.ramonbuzo.tech',               protected: false },
